@@ -46,7 +46,7 @@ class Admin_Init {
 	}
 
 	public function add_settings_link( $links ) {
-		$settings_link = '<a href="options-general.php?page=wp-amp-themes">' . __( 'Settings' ) . '</a>';
+		$settings_link = '<a href="' . get_admin_url() . 'admin.php?page=wp-amp-themes">' . __( 'Settings' ) . '</a>';
 
 		if ( ! is_plugin_active( 'amp/amp.php' ) ) {
 			$settings_link = '<a href="' . get_admin_url() . 'admin.php?page=wp-amp-instructions"><span style="color:#b30000">' . __( 'Action Required: Get AMP' ) . '</span>' . '</a>';
