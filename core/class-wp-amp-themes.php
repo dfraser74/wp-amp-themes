@@ -15,9 +15,8 @@ class WP_AMP_Themes {
 	 * The activate() method is called on the activation of the plugin.
 	 */
 	public function activate() {
-		$defaults = ['theme' => 'obliq'];
 
-		update_option('wp_amp_themes_options', json_encode($defaults));
+		update_option('wp_amp_themes_options_theme', 'obliq');
 	}
 
 

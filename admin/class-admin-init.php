@@ -11,10 +11,14 @@ class Admin_Init {
 
 	private static $menu_title = WP_AMP_THEMES_PLUGIN_NAME;
 	private static $label = WP_AMP_THEMES_SHORT_NAME;
-	private  $options;
+
 
 	function __construct() {
-		$this->options = json_decode(get_option('wp_amp_themes_options'), true);
+		add_action( 'admin_menu', [ $this, 'admin_menu' ]);
+
+		add_action( 'admin_notices', [ $this, 'amp_plugin_check' ]);
+
+		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), [ $this, 'add_settings_link' ]);
 	}
 
 	public function admin_menu() {
@@ -56,18 +60,6 @@ class Admin_Init {
 
 		return $links;
 	}
-
-	public function set_wp_amp_theme_template( $file, $type, $post ) {
-		if ( 'single' === $type ) {
-			$file = WP_AMP_THEMES_PLUGIN_PATH . 'frontend/themes/' . $this->options['theme'] . '/single.php';
-		}
-		return $file;
-	}
-
-	public function set_wp_amp_theme_css( $amp_template ) {
-		include('/../frontend/themes/' . $this->options['theme'] . '/style.php');
-	}
-
 
 }
 
