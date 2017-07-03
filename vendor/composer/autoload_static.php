@@ -10,6 +10,7 @@ class ComposerStaticInitca8785c04f197d9ab91fffbccdb945c7
         'WP_AMP_Themes\\Admin\\Admin_Init' => __DIR__ . '/../..' . '/admin/class-admin-init.php',
         'WP_AMP_Themes\\Core\\WP_AMP_Themes' => __DIR__ . '/../..' . '/core/class-wp-amp-themes.php',
         'WP_AMP_Themes\\Frontend\\Frontend_Init' => __DIR__ . '/../..' . '/frontend/class-frontend-init.php',
+        'WP_AMP_Themes\\Includes\\Options' => __DIR__ . '/../..' . '/includes/class-options.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

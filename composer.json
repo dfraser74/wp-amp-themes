@@ -4,7 +4,8 @@
     "classmap": [
         "core/",
         "admin/",
-        "frontend/"
+        "frontend/",
+        "includes/"
     ]
 }
 
