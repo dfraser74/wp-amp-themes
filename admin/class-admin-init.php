@@ -13,21 +13,44 @@ class Admin_Init {
 	private static $label = WP_AMP_THEMES_SHORT_NAME;
 
 
+	/**
+	*
+	*
+	*
+	*/
 	function __construct() {
 		add_action( 'admin_menu', [ $this, 'admin_menu' ]);
 
 		add_action( 'admin_notices', [ $this, 'amp_plugin_check' ]);
 
-		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), [ $this, 'add_settings_link' ]);
+		add_filter( 'plugin_action_links_' . plugin_basename(WP_AMP_THEMES_PLUGIN_PATH . '/wp-amp-themes.php'), [ $this, 'add_settings_link' ]);
 	}
 
 	public function admin_menu() {
 		if ( is_plugin_active( 'amp/amp.php' ) ) {
 			// Add menu hook.
-			add_menu_page( self::$menu_title, self::$label, 'manage_options', 'wp-amp-themes', array( $this, 'themes' ), WP_PLUGIN_URL . '/' . WP_AMP_THEMES_DOMAIN . '/admin/images/amp-logo.png' );
+			add_menu_page( self::$menu_title, self::$label, 'manage_options', 'wp-amp-themes', [ $this, 'themes' ], WP_PLUGIN_URL . '/' . WP_AMP_THEMES_DOMAIN . '/admin/images/amp-logo.png' );
+
+			$this->settings_init();
+
 		} else {
-			add_menu_page( self::$menu_title, self::$label, 'manage_options', 'wp-amp-instructions', array( $this, 'missing_amp_instructions' ), WP_PLUGIN_URL . '/' . WP_AMP_THEMES_DOMAIN . '/admin/images/amp-logo-notice.png' );
+			add_menu_page( self::$menu_title, self::$label, 'manage_options', 'wp-amp-instructions', [ $this, 'missing_amp_instructions' ], WP_PLUGIN_URL . '/' . WP_AMP_THEMES_DOMAIN . '/admin/images/amp-logo-notice.png' );
 		}
+	}
+
+	public function settings_init() {
+		add_settings_section(
+			'wp_amp_themes_options',
+			'AMP Themes Options',
+			[$this, 'theme_options_callback'],
+			'wp-amp-themes'
+		);
+
+	}
+
+	public function theme_options_callback() {
+
+    	echo '<p>Select your AMP theme.</p>';
 	}
 
 	public function themes() {
