@@ -9,7 +9,7 @@
 namespace WP_AMP_Themes;
 
 require_once 'vendor/autoload.php';
-require_once '/core/config.php';
+require_once 'core/config.php';
 
 global $wp_amp_themes;
 $wp_amp_themes  = new Core\WP_AMP_Themes();
