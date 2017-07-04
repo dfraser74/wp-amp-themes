@@ -13,9 +13,9 @@ class Options
 	/* Properties						 */
 	/* ----------------------------------*/
 
-	public static $prefix = 'wp_amp_themes';
+	public $prefix = 'wp_amp_themes_';
 
-	public static $options = [
+	public $options = [
 		'theme' => 'obliq'
 	];
 
@@ -42,10 +42,10 @@ class Options
 			$settings = array();
 
 			foreach ($option as $option_name => $option_value) {
-				if (get_option(self::$prefix . $option_name) == '')
-					$settings[$option_name] = self::$options[$option_name];
+				if (get_option($this->prefix . $option_name) == '')
+					$settings[$option_name] = $this->options[$option_name];
 				else
-					$settings[$option_name] = get_option(self::$prefix . $option_name);
+					$settings[$option_name] = get_option($this->prefix . $option_name);
 			}
 
 			// return array
@@ -54,10 +54,10 @@ class Options
 		} elseif (is_string($option)) { // if option is a string, return the value of the option
 
 			// check if the option is added in the db
-			if (get_option(self::$prefix . $option) === false) {
-				$setting = self::$options[$option];
+			if (get_option($this->prefix . $option) === false) {
+				$setting = $this->options[$option];
 			} else {
-				$setting = get_option(self::$prefix . $option);
+				$setting = get_option($this->prefix . $option);
 			}
 
 			return $setting;
@@ -76,7 +76,7 @@ class Options
 	 * @return bool
 	 *
 	 */
-	public static function save_settings($option, $option_value = '') {
+	public function save_settings($option, $option_value = '') {
 
 		if (current_user_can('manage_options')) {
 
@@ -87,8 +87,8 @@ class Options
 
 				foreach ($option as $option_name => $option_value) {
 
-					if (array_key_exists($option_name, self::$options))
-						add_option(self::$prefix . $option_name, $option_value);
+					if (array_key_exists($option_name, $this->options))
+						add_option($this->prefix . $option_name, $option_value);
 					else
 						$option_not_saved = true; // there is at least one option not in the default list
 				}
@@ -100,8 +100,8 @@ class Options
 
 			} elseif (is_string($option) && $option_value != '') {
 
-				if (array_key_exists($option, self::$options))
-					return add_option(self::$prefix . $option, $option_value);
+				if (array_key_exists($option, $this->options))
+					return add_option($this->prefix . $option, $option_value);
 
 			}
 
