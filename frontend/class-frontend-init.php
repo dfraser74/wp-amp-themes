@@ -8,23 +8,35 @@ namespace WP_AMP_Themes\Frontend;
  */
 class Frontend_Init {
 
-	function __construct() {
+
+	public function __construct() {
 
 		add_filter( 'amp_post_template_file', [ $this, 'set_wp_amp_theme_template' ], 10, 3 );
 
 		add_filter( 'amp_post_template_css', [ $this, 'set_wp_amp_theme_css']);
+
 	}
 
 
 	public function set_wp_amp_theme_template( $file, $type, $post ) {
+
+		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
+		$theme = $wp_amp_themes_options->get_setting('theme');
+
 		if ( 'single' === $type ) {
-			$file = WP_AMP_THEMES_PLUGIN_PATH . 'frontend/themes/obliq/single.php';
+			$file = WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$theme/single.php";
 		}
 		return $file;
 	}
 
 	public function set_wp_amp_theme_css( $amp_template ) {
-		include('/../frontend/themes/obliq/style.php');
+
+		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
+		$theme = $wp_amp_themes_options->get_setting('theme');
+
+		include("themes/$theme/style.php");
 	}
+
+
 
 }
