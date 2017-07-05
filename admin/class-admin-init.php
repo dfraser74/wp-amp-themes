@@ -46,11 +46,28 @@ class Admin_Init {
 			'wp-amp-themes'
 		);
 
+		add_settings_field(
+			'wp_amp_themes_theme',
+			'Select Theme',
+			[$this, 'theme_field_callback'],
+			'wp-amp-themes',
+			'wp_amp_themes_options'
+		);
+
 	}
 
 	public function theme_options_callback() {
 
     	echo '<p>Select your AMP theme.</p>';
+	}
+
+	public function theme_field_callback() {
+
+		$options = get_option( 'wp_amp_themes_theme' );
+
+		$html = '<input type="radio" id="radio_example_one" name="sandbox_theme_input_examples[radio_example]" value="1"' . checked( 1, $options, false ) . '/>';
+		$html .= '<label for="radio_example_one">Obliq</label>';
+		echo $html;
 	}
 
 	public function themes() {
