@@ -1,10 +1,15 @@
 <?php
+namespace WP_AMP_Themes;
 
-if( !defined( 'WP_UNINSTALL_PLUGIN' ) )
+if( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
     exit ();
+}
 
+require_once( 'vendor/autoload.php' );
 
-delete_option( 'wp_amp_themes_options_theme' );
+$wp_amp_themes_options = new Includes\Options();
+
+$wp_amp_themes_options->delete_settings($wp_amp_themes_options->options);
 
 
 ?>
