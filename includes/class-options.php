@@ -111,4 +111,30 @@ class Options
 
 	}
 
+
+   /**
+	*
+	* The delete_settings method is used to delete the setting/settings of the plugin from the options table in the database.
+	*
+	* @param $option - array / string
+	*
+	* @return bool
+	*
+	*/
+	public static function delete_settings($option)
+	{
+		if (current_user_can('manage_options')) {
+			if (is_array($option) && !empty($option)) {
+				foreach ($option as $option_name => $option_value) {
+					if (array_key_exists($option_name, $this->options))
+						delete_option($this->prefix . $option_name);
+				}
+				return true;
+			} elseif (is_string($option)) {
+				if (array_key_exists($option, $this->options))
+					return delete_option($this->prefix . $option);
+			}
+		}
+	}
+
 }
