@@ -1,31 +1,39 @@
 <!doctype html>
 
-<!---
-Copyright 2017 The AMP start Authors. All Rights Reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS-IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
--->
-
 <html ⚡="">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
-	<?php do_action( 'amp_post_template_head', $this ); ?>
-	<script async="" src="https://cdn.ampproject.org/v0.js"></script>
-	<style amp-custom>
-		<?php do_action( 'amp_post_template_css', $this ); ?>
-	</style>
-</head>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+
+		<?php do_action( 'amp_post_template_head', $this ); ?>
+
+		<script custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js" async=""></script>
+		<script custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js" async=""></script>
+		<script custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js" async=""></script>
+		<script custom-element="amp-instagram" src="https://cdn.ampproject.org/v0/amp-instagram-0.1.js" async=""></script>
+		<script custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js" async=""></script>
+
+		<style amp-custom>
+			<?php do_action( 'amp_post_template_css', $this ); ?>
+		</style>
+	</head>
+
+	<body>
+		<!-- Start Navbar -->
+		<header class="ampstart-headerbar fixed flex justify-start items-center top-0 left-0 right-0 pl2 pr4">
+			<div role="button" aria-label="open sidebar" on="tap:header-sidebar.toggle" tabindex="0" class="ampstart-navbar-trigger  pr2">☰</div>
+		</header>
 
 
-<?php echo $this->get( 'post_amp_content' );
+  		<?php include('side-menu.php') ?>
+		<!-- End Navbar -->
+
+		<figure class="ampstart-image-fullpage-hero m0 relative">
+			<div class="bg-cover vw vh hero-cover"></div>
+			<figcaption class="absolute top-0 right-0 left-0">
+				<?php include('post-meta.php') ?>
+			</figcaption>
+		</figure>
+	</body>
+</html>
+
