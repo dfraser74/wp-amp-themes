@@ -26,9 +26,19 @@ register_activation_hook( __FILE__, [ &$wp_amp_themes, 'activate' ] );
 register_deactivation_hook( __FILE__, [ &$wp_amp_themes, 'deactivate' ] );
 
 if ( is_admin() ) {
-	add_action('plugins_loaded', 'WP_AMP_Themes\wp_amp_themes_admin_init');
 
-}else{
-	add_action('plugins_loaded', 'WP_AMP_Themes\wp_amp_themes_frontend_init');
+	if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+
+		$wp_amp_themes_admin_ajax = new Admin\Admin_Ajax();
+
+		add_action( 'wp_ajax_wp_amp_themes_settings', [ &$wp_amp_themes_admin_ajax, 'settings' ] );
+
+	} else {
+
+		add_action( 'plugins_loaded', 'WP_AMP_Themes\wp_amp_themes_admin_init' );
+	}
+
+} else {
+	add_action( 'plugins_loaded', 'WP_AMP_Themes\wp_amp_themes_frontend_init' );
 
 }

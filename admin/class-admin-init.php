@@ -1,5 +1,4 @@
 <?php
-
 namespace WP_AMP_Themes\Admin;
 
 /**
@@ -14,91 +13,93 @@ class Admin_Init {
 
 
 	/**
-	*
-	*
-	*
-	*/
+	 * Constructor functions that adds all the admin hooks.
+	 */
 	function __construct() {
-		add_action( 'admin_menu', [ $this, 'admin_menu' ]);
+		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
 
-		add_action( 'admin_notices', [ $this, 'amp_plugin_check' ]);
+		add_action( 'admin_notices', [ $this, 'amp_plugin_check' ] );
 
-		add_filter( 'plugin_action_links_' . plugin_basename(WP_AMP_THEMES_PLUGIN_PATH . '/wp-amp-themes.php'), [ $this, 'add_settings_link' ]);
+		add_filter( 'plugin_action_links_' . plugin_basename( WP_AMP_THEMES_PLUGIN_PATH . '/wp-amp-themes.php' ), [ $this, 'add_settings_link' ] );
+
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 	}
 
+
+	/**
+	 * Function that adds the plugin settings button to the wordpress menu side bar.
+	 */
 	public function admin_menu() {
 		if ( is_plugin_active( 'amp/amp.php' ) ) {
 			// Add menu hook.
-			add_menu_page( self::$menu_title, self::$label, 'manage_options', 'wp-amp-themes', [ $this, 'themes' ], WP_PLUGIN_URL . '/' . WP_AMP_THEMES_DOMAIN . '/admin/images/amp-logo.png' );
-
-			$this->settings_init();
-
+			add_menu_page( self::$menu_title, self::$label, 'manage_options', 'wp-amp-themes', [ $this, 'settings' ], WP_PLUGIN_URL . '/' . WP_AMP_THEMES_DOMAIN . '/admin/images/amp-logo.png' );
 		} else {
 			add_menu_page( self::$menu_title, self::$label, 'manage_options', 'wp-amp-instructions', [ $this, 'missing_amp_instructions' ], WP_PLUGIN_URL . '/' . WP_AMP_THEMES_DOMAIN . '/admin/images/amp-logo-notice.png' );
 		}
 	}
 
-	public function settings_init() {
-		add_settings_section(
-			'wp_amp_themes_options',
-			'AMP Themes Options',
-			[$this, 'theme_options_callback'],
-			'wp-amp-themes'
-		);
-
-		add_settings_field(
-			'wp_amp_themes_theme',
-			'Select Theme',
-			[$this, 'theme_field_callback'],
-			'wp-amp-themes',
-			'wp_amp_themes_options'
-		);
-
+	/**
+	 * Load settings page.
+	 */
+	public function settings() {
+		include( WP_AMP_THEMES_PLUGIN_PATH . 'admin/pages/settings.php' );
 	}
 
-	public function theme_options_callback() {
 
-    	echo '<p>Select your AMP theme.</p>';
-	}
-
-	public function theme_field_callback() {
-
-		$options = get_option( 'wp_amp_themes_theme' );
-
-		$html = '<input type="radio" id="radio_example_one" name="sandbox_theme_input_examples[radio_example]" value="1"' . checked( 1, $options, false ) . '/>';
-		$html .= '<label for="radio_example_one">Obliq</label>';
-		echo $html;
-	}
-
-	public function themes() {
-		include( WP_AMP_THEMES_PLUGIN_PATH . 'admin/pages/themes.php' );
-
-	}
-
+	/**
+	 * Load page with instructions to install AMP.
+	 */
 	public function missing_amp_instructions() {
 		include( WP_AMP_THEMES_PLUGIN_PATH . 'admin/pages/missing-amp-instructions.php' );
 	}
 
+
+	/**
+	 * Checks if the AMP plugin from Automattic is installed and displays a notice if not.
+	 */
 	public function amp_plugin_check() {
 		if ( ! is_plugin_active( 'amp/amp.php' ) ) {
 
 			echo '<div class ="notice notice-warning is-dismissible">
-						<p><b>WP AMP Themes</b> requires that you have the AMP plugin from Automattic installed</p>
-						<a href="' . get_admin_url() . 'admin.php?page=wp-amp-instructions">Continue Installation</a>
+						<p><b>WP AMP Themes</b> requires that you have the AMP plugin from Automattic active.</p>
+						<p>
+							Please make sure you have the plugin installed and activated. <a href="https://wordpress.org/plugins/amp/">Download the AMP plugin</a>
+						</p>
 				  </div>';
 		}
 	}
 
+	/**
+	 * Adds a settings link to the plugin in the plugin list.
+	 */
 	public function add_settings_link( $links ) {
 		$settings_link = '<a href="' . get_admin_url() . 'admin.php?page=wp-amp-themes">' . __( 'Settings' ) . '</a>';
 
 		if ( ! is_plugin_active( 'amp/amp.php' ) ) {
-			$settings_link = '<a href="' . get_admin_url() . 'admin.php?page=wp-amp-instructions"><span style="color:#b30000">' . __( 'Action Required: Get AMP' ) . '</span>' . '</a>';
+			$settings_link = '<a href="' . get_admin_url() . 'admin.php?page=wp-amp-instructions"><span style="color:#b30000">' . __( 'Action Required: Get AMP' ) . '</span></a>';
 		}
 
 		array_push( $links, $settings_link );
 
 		return $links;
+	}
+
+	/**
+	 * Used to enqueue scripts for the admin area.
+	 */
+	public function enqueue_scripts() {
+
+		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
+
+		$dependencies = array( 'jquery-core', 'jquery-migrate' );
+
+		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_validate', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/Lib/jquery.validate.min.js' ), $dependencies, '1.11.1' );
+		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_validate_additional', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/Lib/validate-additional-methods.min.js' ), $dependencies, '1.11.1' );
+		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_loader', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/Loader.min.js' ), $dependencies, WP_AMP_THEMES_VERSION );
+		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_ajax_upload', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/AjaxUpload.min.js' ), $dependencies, WP_AMP_THEMES_VERSION );
+		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_interface', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/JSInterface.min.js' ), $dependencies, WP_AMP_THEMES_VERSION );
+		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_scrollbar', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/Lib/perfect-scrollbar.min.js' ), [], WP_AMP_THEMES_VERSION );
+		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_settings', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Modules/WP_AMP_Themes_Settings.js' ), [], WP_AMP_THEMES_VERSION );
 	}
 
 }
