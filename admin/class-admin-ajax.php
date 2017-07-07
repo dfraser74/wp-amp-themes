@@ -37,7 +37,7 @@ class Admin_Ajax {
 
 					} else {
 
-						$response['message'] = 'Your AMP Theme settings have not changed';
+						$response['message'] = 'Your AMP Theme settings have not changed.';
 					}
 				}
 			}
