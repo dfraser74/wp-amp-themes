@@ -7,9 +7,9 @@ $is_secure = ( ! empty( $_SERVER['HTTPS'] ) && 'off' !== $_SERVER['HTTPS'] ) || 
 
 ?>
 
-
-<div class="wp_amp_themes_subscription_container">
-	<div class="spacer-10"></div>
+<div class="container wp_amp_themes_subscription_container">
+	<h2>News & Updates</h2>
+	<hr class="separator" />
 	<p>Sign up for news on new themes and features!</p>
 	<div class="spacer-10"></div>
 	<?php if ( false == $joined_subscriber_list ) : ?>
@@ -17,9 +17,8 @@ $is_secure = ( ! empty( $_SERVER['HTTPS'] ) && 'off' !== $_SERVER['HTTPS'] ) || 
 			<input name="wp_amp_themes_subscription_email" id="wp_amp_themes_subscription_email" type="text" placeholder="Your e-mail address" class="small" value="<?php echo get_option( 'admin_email' );?>" />
 			<div class="spacer-5"></div>
 			<div class="field-message error" id="error_emailaddress_container"></div>
-			<div class="spacer-10"></div>
-
-			<a class="btn blue smaller" href="javascript:void(0)" id="wp_amp_themes_subscribe_send_btn">Subscribe</a>
+			<div class="spacer-0"></div>
+			<a class="button button-primary button-large" href="javascript:void(0)" id="wp_amp_themes_subscribe_send_btn">Subscribe</a>
 		</form>
 	<?php endif;?>
 	<div id="wp_amp_themes_subscription_added" class="added" style="display: <?php echo $joined_subscriber_list ? 'block' : 'none'?>;">
