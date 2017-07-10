@@ -1,12 +1,16 @@
 {
-
-"autoload": {
+  "name": "wp-amp-themes",
+  "description": "",
+  "version": "0.5",
+  "autoload": {
     "classmap": [
-        "core/",
-        "admin/",
-        "frontend/",
-        "includes/"
+      "core/",
+      "admin/",
+      "frontend/",
+      "includes/"
     ]
-}
-
+  },
+  "require": {
+    "php": ">=5.4.0"
+  }
 }
