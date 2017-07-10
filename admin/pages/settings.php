@@ -1,10 +1,7 @@
 <?php
-namespace WP_AMP_Themes\Admin\Pages;
-
 $wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
 
 $theme = $wp_amp_themes_options->get_setting( 'theme' );
-
 ?>
 
 
@@ -27,6 +24,8 @@ $theme = $wp_amp_themes_options->get_setting( 'theme' );
 <form name="wp_amp_themes_settings_form" id="wp_amp_themes_settings_form" action="<?php echo admin_url( 'admin-ajax.php' ); ?>?action=wp_amp_themes_settings"  method="post">
 	<label >Pick your AMP Theme</label></br></br>
 	<input type="radio" name="theme" value="obliq"<?php checked( 'obliq' === $theme ); ?>> Obliq </input></br></br>
+	<p>Enter your Google Analytics id:</p>
+	<input type="text" name="analytics_id"></input> </br> </br>
 	<a href="javascript:void(0)" id="wp_amp_themes_settings_send_btn" class="button button-primary button-large">Save</a>
 </form>
 
