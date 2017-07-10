@@ -2,6 +2,8 @@
 $wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
 
 $theme = $wp_amp_themes_options->get_setting( 'theme' );
+$analytics_id = $wp_amp_themes_options->get_setting( 'analytics_id' );
+$facebook_app_id = $wp_amp_themes_options->get_setting( 'facebook_app_id' );
 
 $wp_amp_themes_admin_updates = new \WP_AMP_Themes\Admin\Admin_Updates();
 $wp_amp_themes_premium = $wp_amp_themes_admin_updates->premium_themes();
@@ -28,10 +30,10 @@ $wp_amp_themes_premium = $wp_amp_themes_admin_updates->premium_themes();
 				<input type="radio" name="theme" value="obliq" <?php checked( 'obliq' === $theme ); ?>> Obliq </input><br/><br/>
 
 				<label class="textinput">Google Analytics ID:</label>
-				<input type="text" name="analytics_id"></input> </br> </br>
+				<input type="text" name="analytics_id" value="<?php echo $analytics_id; ?>"></input> </br> </br>
 
 				<label class="textinput">Facebook App ID:</label>
-				<input type="text" name="facebook_app_id"></input> </br> </br>
+				<input type="text" name="facebook_app_id" value="<?php echo $facebook_app_id; ?>"></input> </br> </br>
 
 				<a href="javascript:void(0)" id="wp_amp_themes_settings_send_btn" class="button button-primary button-large">Save</a>
 			</form>
