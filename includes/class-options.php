@@ -16,7 +16,6 @@ class Options {
 	];
 
 
-
 	/**
 	 * The get_setting method is used to read an option value (or options) from the database.
 	 *

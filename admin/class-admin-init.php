@@ -91,6 +91,8 @@ class Admin_Init {
 
 		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
 
+		wp_enqueue_style( $wp_amp_themes_options->prefix . 'css_general', plugins_url(WP_AMP_THEMES_DOMAIN.'/admin/css/general.css'), array(), WP_AMP_THEMES_VERSION);
+
 		$dependencies = array( 'jquery-core', 'jquery-migrate' );
 
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_validate', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/Lib/jquery.validate.min.js' ), $dependencies, '1.11.1' );
@@ -98,7 +100,6 @@ class Admin_Init {
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_loader', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/Loader.min.js' ), $dependencies, WP_AMP_THEMES_VERSION );
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_ajax_upload', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/AjaxUpload.min.js' ), $dependencies, WP_AMP_THEMES_VERSION );
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_interface', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/JSInterface.min.js' ), $dependencies, WP_AMP_THEMES_VERSION );
-		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_scrollbar', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/Lib/perfect-scrollbar.min.js' ), [], WP_AMP_THEMES_VERSION );
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_settings', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Modules/WP_AMP_Themes_Settings.js' ), [], WP_AMP_THEMES_VERSION );
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_subscribe', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Modules/WP_AMP_Subscribe.js'), [], WP_AMP_THEMES_VERSION );
 	}
