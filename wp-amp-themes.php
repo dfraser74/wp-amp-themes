@@ -42,7 +42,6 @@ if ( is_admin() ) {
 	} else {
 
 		add_action( 'plugins_loaded', 'WP_AMP_Themes\wp_amp_themes_admin_init' );
-		add_filter( 'amp_customizer_is_enabled', '__return_false' );
 	}
 
 } else {
