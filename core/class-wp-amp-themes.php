@@ -20,7 +20,7 @@ class WP_AMP_Themes {
 
 		// Saves the default settings to the database, if the plugin was previously activated,
 		// it does not change the old settings.
-		$wp_amp_themes_options->save_settings($wp_amp_themes_options->options);
+		$wp_amp_themes_options->save_settings( $wp_amp_themes_options->options );
 
 	}
 

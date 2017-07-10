@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-		<?php do_action ( 'amp_post_template_head', $this); ?>
+		<?php do_action( 'amp_post_template_head', $this ); ?>
 
 		<script custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js" async=""></script>
 		<script custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js" async=""></script>
@@ -23,19 +23,19 @@
 			<div role="button" aria-label="open sidebar" on="tap:header-sidebar.toggle" tabindex="0" class="ampstart-navbar-trigger  pr2">☰</div>
 		</header>
 
-		<?php include('side-menu.php') ?>
+		<?php include( 'side-menu.php' ) ?>
 		<!-- End Navbar -->
 
-		<?php include('post-meta.php') ?>
+		<?php include( 'post-meta.php' ) ?>
 
   <!-- End Fullpage Hero -->
   <main id="content" role="main" class="px3">
 
-    <article class="photo-article ampstart-article-content">
-		<?php echo $this->get( 'post_amp_content' ); // amphtml content; no kses ?>
+	<article class="photo-article ampstart-article-content">
+			<?php echo $this->get( 'post_amp_content' ); // amphtml content; no kses ?>
 
-		<?php include('social.php'); ?>
-    </article>
+			<?php include( 'social.php' ); ?>
+	</article>
   </main>
 
 </body>

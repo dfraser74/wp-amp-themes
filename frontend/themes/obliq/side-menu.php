@@ -18,11 +18,11 @@
 						<section>
 							<header class="px3 py3">Categories</header>
 							<ul class="ampstart-dropdown-items list-reset m0 p0">
-							<?php if( $categories ): ?>
-								<?php foreach( $categories as $category ) : ?>
+							<?php if ( $categories ) : ?>
+								<?php foreach ( $categories as $category ) : ?>
 									<li class="ampstart-dropdown-item">
-										<a href="<?php echo esc_url(get_category_link($category->cat_ID)); ?>" class="text-decoration-none">
-											<h6 class="px3"><?php echo esc_html($category->cat_name); ?></h6>
+										<a href="<?php echo esc_url( get_category_link( $category->cat_ID ) ); ?>" class="text-decoration-none">
+											<h6 class="px3"><?php echo esc_html( $category->cat_name ); ?></h6>
 										</a>
 									</li>
 								<?php endforeach; ?>
@@ -38,11 +38,11 @@
 						<section>
 							<header class="px3 py3">Pages</header>
 							<ul class="ampstart-dropdown-items list-reset m0 p0">
-								<?php if( $pages ): ?>
-									<?php foreach( $pages as $page ) : ?>
+								<?php if ( $pages ) : ?>
+									<?php foreach ( $pages as $page ) : ?>
 										<li class="ampstart-dropdown-item">
-											<a href="<?php echo esc_url(get_permalink($page->ID)); ?>" class="text-decoration-none">
-												<h6 class="px3"><?php echo esc_html($page->post_title); ?></h6>
+											<a href="<?php echo esc_url( get_permalink( $page->ID ) ); ?>" class="text-decoration-none">
+												<h6 class="px3"><?php echo esc_html( $page->post_title ); ?></h6>
 											</a>
 										</li>
 									<?php endforeach; ?>
