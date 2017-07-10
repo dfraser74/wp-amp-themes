@@ -6,7 +6,8 @@ $analytics_id = $wp_amp_themes_options->get_setting( 'analytics_id' );
 $facebook_app_id = $wp_amp_themes_options->get_setting( 'facebook_app_id' );
 
 $wp_amp_themes_admin_updates = new \WP_AMP_Themes\Admin\Admin_Updates();
-$wp_amp_themes_premium = $wp_amp_themes_admin_updates->premium_themes();
+$premium_content = $wp_amp_themes_admin_updates->premium_themes();
+$premium_themes = isset($premium_content['list']) && is_array($premium_content['list']) ? $premium_content['list'] : [];
 ?>
 
 <script type="text/javascript">
@@ -26,18 +27,39 @@ $wp_amp_themes_premium = $wp_amp_themes_admin_updates->premium_themes();
 			<h1>WP AMP Themes - Settings</h1>
 			<hr class="separator" />
 			<form name="wp_amp_themes_settings_form" id="wp_amp_themes_settings_form" action="<?php echo admin_url( 'admin-ajax.php' ); ?>?action=wp_amp_themes_settings" method="post">
-				<label>Pick your AMP Theme</label>
-				<input type="radio" name="theme" value="obliq" <?php checked( 'obliq' === $theme ); ?>> Obliq </input><br/><br/>
+				<label class="textinput">Pick your AMP Theme:</label>
+				<div class="theme-box">
+					<img src="<?php echo plugins_url().'/'.WP_AMP_THEMES_DOMAIN.'/admin/images/theme-obliq.jpg';?>" />
+					<p>
+						<input type="radio" name="theme" value="obliq" <?php checked( 'obliq' === $theme ); ?>> Obliq </input><br/>
+					</p>
+				</div>
+				<div class="spacer-10"></div>
 
 				<label class="textinput">Google Analytics ID:</label>
-				<input type="text" name="analytics_id" value="<?php echo $analytics_id; ?>"></input> </br> </br>
+				<input type="text" name="analytics_id" value="<?php echo $analytics_id; ?>"></input> <br/>
 
 				<label class="textinput">Facebook App ID:</label>
-				<input type="text" name="facebook_app_id" value="<?php echo $facebook_app_id; ?>"></input> </br> </br>
+				<input type="text" name="facebook_app_id" value="<?php echo $facebook_app_id; ?>"></input> <br/>
 
 				<a href="javascript:void(0)" id="wp_amp_themes_settings_send_btn" class="button button-primary button-large">Save</a>
 			</form>
-			<div class="spacer-0"></div>
+			<div class="spacer-20"></div>
+
+			<?php if (count($premium_themes) > 0):?>
+
+				<h2>Premium WP AMP Themes</h1>
+				<hr class="separator" />
+
+				<div class="themes">
+					<?php
+						foreach ($premium_themes as $theme){
+							include(WP_AMP_THEMES_PLUGIN_PATH.'admin/sections/theme-box-premium.php');
+						}
+					?>
+				</div>
+
+			<?php endif;?>
 		</div>
 
 		<div class="right-side">

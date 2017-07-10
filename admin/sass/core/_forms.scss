@@ -34,6 +34,12 @@
 		color: $label-color;
 	}
 
+	label.textinput {
+		width: 200px;
+		float: left;
+		margin: 5px 5px 0 0;
+	}
+
 	.field-message{
 		margin: 0px 0 0px 15px;
 		@include wbz-box-shadow(none);
