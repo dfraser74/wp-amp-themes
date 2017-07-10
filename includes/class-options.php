@@ -12,7 +12,8 @@ class Options {
 
 	public $options = [
 		'theme' => 'obliq',
-		'joined_subscriber_list' => ''
+		'joined_subscriber_list' => '',
+		'analytics_id' => '',
 	];
 
 
