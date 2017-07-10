@@ -18,27 +18,58 @@ class Admin_Ajax {
 				'message' => 'There was an error. Please reload the page and try again.',
 			];
 
-			if ( ! empty( $_POST ) && isset( $_POST['theme'] ) ) {
+			$changed = 0;
+
+			if ( ! empty( $_POST ) ) {
 
 				$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
 				$wp_amp_themes_config = new \WP_AMP_Themes\Core\Themes_Config();
 
-				if ( in_array( $_POST['theme'], $wp_amp_themes_config->allowed_themes, true ) ) {
+				if ( isset( $_POST['theme'] ) && in_array( $_POST['theme'], $wp_amp_themes_config->allowed_themes, true ) ) {
 
 					$new_theme = sanitize_text_field( $_POST['theme'] );
 
 					if ( $new_theme !== $wp_amp_themes_options->get_setting( 'theme' ) ) {
 
-						$response['status'] = 1;
-						$response['message'] = 'Your AMP Theme settings have been successfully modified!';
-
+						$changed = 1;
 						$wp_amp_themes_options->update_settings( 'theme', $new_theme );
 
-					} else {
+					}
 
-						$response['message'] = 'Your AMP Theme settings have not changed.';
+				}
+
+				if ( isset( $_POST['analytics_id'] ) ) {
+
+					$new_analytics_id = sanitize_text_field( $_POST['analytics_id'] );
+
+					if ( $new_analytics_id !== $wp_amp_themes_options->get_setting( 'analytics_id' ) ) {
+
+						$changed = 1;
+						$wp_amp_themes_options->update_settings( 'analytics_id', $new_analytics_id );
 					}
 				}
+
+				if ( isset( $_POST['facebook_app_id'] ) ) {
+
+					$new_facebook_app_id = sanitize_text_field( $_POST['facebook_app_id'] );
+
+					if ( $new_facebook_app_id !== $wp_amp_themes_options->get_setting( 'facebook_app_id' ) ) {
+
+						$changed = 1;
+						$wp_amp_themes_options->update_settings( 'facebook_app_id', $new_facebook_app_id );
+					}
+				}
+
+				if ( $changed ) {
+
+					$response['status'] = 1;
+					$response['message'] = 'Your AMP Theme settings have been successfully modified!';
+
+				} else {
+
+					$response['message'] = 'Your AMP Theme settings have not changed.';
+				}
+
 			}
 
 			echo wp_json_encode( $response );
