@@ -1,6 +1,8 @@
 <?php
 namespace WP_AMP_Themes\Admin;
 
+use \WP_AMP_Themes\Includes\Options;
+
 /**
  * Admin_Init class for initializing the admin area of the WP AMP Themes plugin.
  *
@@ -60,7 +62,7 @@ class Admin_Init {
 	public function amp_plugin_check() {
 		if ( ! is_plugin_active( 'amp/amp.php' ) ) {
 
-			echo '<div class ="notice notice-warning is-dismissible">
+			echo '<div class="notice notice-warning is-dismissible">
 						<p><b>WP AMP Themes</b> requires that you have the AMP plugin from Automattic active.</p>
 						<p>
 							Please make sure you have the plugin installed and activated. <a href="https://wordpress.org/plugins/amp/">Download the AMP plugin</a>
@@ -89,7 +91,7 @@ class Admin_Init {
 	 */
 	public function enqueue_scripts() {
 
-		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
+		$wp_amp_themes_options = new Options();
 
 		wp_enqueue_style( $wp_amp_themes_options->prefix . 'css_general', plugins_url(WP_AMP_THEMES_DOMAIN.'/admin/css/general.css'), array(), WP_AMP_THEMES_VERSION);
 
