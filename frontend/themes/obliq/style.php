@@ -1,5 +1,5 @@
 
-<?php include('style-amp.php'); ?>
+<?php include('style-amp-plugin.php'); ?>
 
 .list-reset,.list-style-none {
   list-style: none;
