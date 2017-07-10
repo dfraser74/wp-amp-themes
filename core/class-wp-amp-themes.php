@@ -2,6 +2,8 @@
 
 namespace WP_AMP_Themes\Core;
 
+use \WP_AMP_Themes\Includes\Options;
+
 /**
  * Main class for the WP AMP Themes plugin. This class handles:
  *
@@ -16,7 +18,7 @@ class WP_AMP_Themes {
 	 */
 	public function activate() {
 
-		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
+		$wp_amp_themes_options = new Options();
 
 		// Saves the default settings to the database, if the plugin was previously activated,
 		// it does not change the old settings.
@@ -31,7 +33,9 @@ class WP_AMP_Themes {
 	 */
 	public function deactivate() {
 
+		$wp_amp_themes_options = new Options();
+
+		// Delete saved transients when the plugin is deactivated.
+		$wp_amp_themes_options->delete_transients();
 	}
-
-
 }

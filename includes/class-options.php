@@ -211,4 +211,17 @@ class Options {
 		}
 	}
 
+	/**
+	*
+	* Delete all transients and temporary data when the plugin is deactivated.
+	*
+	*/
+	public function delete_transients()
+	{
+		foreach (array('premium_themes') as $transient_name) {
+
+			if (get_transient($this->prefix.$transient_name) !== false)
+				delete_transient($this->prefix.$transient_name);
+		}
+	}
 }
