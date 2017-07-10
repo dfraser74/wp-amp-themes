@@ -3,7 +3,7 @@
 namespace WP_AMP_Themes\Core;
 
 /**
- * Main class for the Wordpress AMP Themes plugin. This class handles:
+ * Main class for the WP AMP Themes plugin. This class handles:
  *
  * - activation / deactivation of the plugin
  */
