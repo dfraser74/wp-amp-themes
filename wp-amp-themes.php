@@ -32,10 +32,12 @@ if ( is_admin() ) {
 		$wp_amp_themes_admin_ajax = new Admin\Admin_Ajax();
 
 		add_action( 'wp_ajax_wp_amp_themes_settings', [ &$wp_amp_themes_admin_ajax, 'settings' ] );
+		add_action( 'wp_ajax_wp_amp_themes_subscribe' , [ &$wp_amp_themes_admin_ajax, 'subscribe' ] );
 
 	} else {
 
 		add_action( 'plugins_loaded', 'WP_AMP_Themes\wp_amp_themes_admin_init' );
+		add_filter( 'amp_customizer_is_enabled', '__return_false' );
 	}
 
 } else {

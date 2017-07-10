@@ -100,6 +100,7 @@ class Admin_Init {
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_interface', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/JSInterface.min.js' ), $dependencies, WP_AMP_THEMES_VERSION );
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_scrollbar', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/Lib/perfect-scrollbar.min.js' ), [], WP_AMP_THEMES_VERSION );
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_settings', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Modules/WP_AMP_Themes_Settings.js' ), [], WP_AMP_THEMES_VERSION );
+		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_subscribe', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Modules/WP_AMP_Subscribe.js'), [], WP_AMP_THEMES_VERSION );
 	}
 
 }
