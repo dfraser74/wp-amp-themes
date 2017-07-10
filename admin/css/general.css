@@ -4,9 +4,6 @@
 /*
 /**********************************************************************************************************************/
 /************************************************/
-/*		import icon and display mixins files
-/************************************************/
-/************************************************/
 /*		mixins for css3 animations
 /************************************************/
 /************************************************/
@@ -521,6 +518,7 @@
   display: block;
   float: left;
   width: 23%;
+  min-width: 200px;
   padding-left: 10px;
 }
 
@@ -581,6 +579,12 @@
   color: #2a2d33;
 }
 
+#wp-amp-themes-admin label.textinput {
+  width: 200px;
+  float: left;
+  margin: 5px 5px 0 0;
+}
+
 #wp-amp-themes-admin .field-message {
   margin: 0px 0 0px 15px;
   -webkit-box-shadow: none;
@@ -609,4 +613,33 @@
 #wp-amp-themes-admin .right-side .container {
   padding: 10px;
   padding-top: 5px;
+}
+
+/**********************************************************************************************************************/
+/*
+/* IMPORT MODULES
+/*
+/**********************************************************************************************************************/
+#wp-amp-themes-admin .theme-box {
+  width: 190px;
+  display: inline-block;
+  margin: 0 10px 10px 0;
+}
+
+#wp-amp-themes-admin .theme-box p {
+  text-align: center;
+}
+
+#wp-amp-themes-admin .theme-box .name {
+  color: #4b4b4b;
+  background: #fcfcfc;
+  border-bottom: 1px solid #dce0e0;
+  padding: 10px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#wp-amp-themes-admin .themes {
+  max-width: 630px;
+  margin: 0 auto;
 }

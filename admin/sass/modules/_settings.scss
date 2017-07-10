@@ -1,0 +1,26 @@
+#wp-amp-themes-admin {
+
+	.theme-box {
+		width: 190px;
+		display: inline-block;
+		margin: 0 10px 10px 0;
+
+		p {
+			text-align: center;
+		}
+
+		.name{
+			color: #4b4b4b;
+			background: $base-grey;
+			border-bottom: 1px solid #dce0e0;
+			padding: 10px;
+			text-transform: uppercase;
+			text-align: center;
+		}
+	}
+
+	.themes {
+		max-width: 630px;
+		margin: 0 auto;
+	}
+}
