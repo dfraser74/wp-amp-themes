@@ -12,6 +12,7 @@ class Options {
 
 	public $options = [
 		'theme' => 'obliq',
+		'joined_subscriber_list' => ''
 	];
 
 

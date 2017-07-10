@@ -13,7 +13,7 @@ class Frontend_Init {
 
 		add_filter( 'amp_post_template_file', [ $this, 'set_wp_amp_theme_template' ], 10, 3 );
 
-		add_filter( 'amp_post_template_css', [ $this, 'set_wp_amp_theme_css']);
+		add_filter( 'amp_post_template_css', [ $this, 'set_wp_amp_theme_css' ] );
 
 	}
 
@@ -21,7 +21,7 @@ class Frontend_Init {
 	public function set_wp_amp_theme_template( $file, $type, $post ) {
 
 		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
-		$theme = $wp_amp_themes_options->get_setting('theme');
+		$theme = $wp_amp_themes_options->get_setting( 'theme' );
 
 		if ( 'single' === $type ) {
 			$file = WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$theme/single.php";
@@ -32,9 +32,9 @@ class Frontend_Init {
 	public function set_wp_amp_theme_css( $amp_template ) {
 
 		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
-		$theme = $wp_amp_themes_options->get_setting('theme');
+		$theme = $wp_amp_themes_options->get_setting( 'theme' );
 
-		include("themes/$theme/style.php");
+		include( "themes/$theme/style.php" );
 	}
 
 
