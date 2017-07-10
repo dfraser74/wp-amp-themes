@@ -2,7 +2,7 @@
 namespace WP_AMP_Themes\Admin;
 
 /**
- * WPMP_Pro_Admin_Ajax class for managing Ajax requests from the admin area of the Wordpress Mobile Pack PRO plugin
+ * Admin_Ajax class for managing Ajax requests from the admin area of the plugin
  */
 class Admin_Ajax {
 

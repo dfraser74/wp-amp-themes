@@ -1,11 +1,16 @@
 <?php
-/**
- * Plugin Name: Wordpress AMP Themes
- * Description: AMP THEMES!
- * Author: Appticles
- * Version: 0.1
- */
 
+ /**
+ * Plugin Name: WP AMP Themes
+ * Plugin URI:  http://wordpress.org/plugins/wp-amp-themes/
+ * Description: WP plugin for AMP templates.
+ * Author: AMPThemes.io
+ * Author URI: http://ampthemes.io/
+ * Version: 0.5
+ * Copyright (c) 2017 AMPThemes.io
+ * License: The WP is Licensed under the Apache License, Version 2.0
+ * Text Domain: wp-amp-themes
+ */
 namespace WP_AMP_Themes;
 
 require_once 'vendor/autoload.php';
