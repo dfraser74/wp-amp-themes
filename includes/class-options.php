@@ -14,6 +14,7 @@ class Options {
 		'theme' => 'obliq',
 		'joined_subscriber_list' => '',
 		'analytics_id' => '',
+		'facebook_app_id' => ''
 	];
 
 

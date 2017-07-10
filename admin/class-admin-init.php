@@ -32,11 +32,14 @@ class Admin_Init {
 	 * Function that adds the plugin settings button to the wordpress menu side bar.
 	 */
 	public function admin_menu() {
+
 		if ( is_plugin_active( 'amp/amp.php' ) ) {
 			// Add menu hook.
 			add_menu_page( self::$menu_title, self::$label, 'manage_options', 'wp-amp-themes', [ $this, 'settings' ], WP_PLUGIN_URL . '/' . WP_AMP_THEMES_DOMAIN . '/admin/images/amp-logo.png' );
+
 		} else {
-			add_menu_page( self::$menu_title, self::$label, 'manage_options', 'wp-amp-instructions', [ $this, 'missing_amp_instructions' ], WP_PLUGIN_URL . '/' . WP_AMP_THEMES_DOMAIN . '/admin/images/amp-logo-notice.png' );
+
+			add_menu_page( self::$menu_title, self::$label, 'manage_options', 'wp-amp-themes', [ $this, 'settings' ], WP_PLUGIN_URL . '/' . WP_AMP_THEMES_DOMAIN . '/admin/images/amp-logo-notice.png' );
 		}
 	}
 
@@ -49,14 +52,6 @@ class Admin_Init {
 
 
 	/**
-	 * Load page with instructions to install AMP.
-	 */
-	public function missing_amp_instructions() {
-		include( WP_AMP_THEMES_PLUGIN_PATH . 'admin/pages/missing-amp-instructions.php' );
-	}
-
-
-	/**
 	 * Checks if the AMP plugin from Automattic is installed and displays a notice if not.
 	 */
 	public function amp_plugin_check() {
@@ -65,7 +60,7 @@ class Admin_Init {
 			echo '<div class="notice notice-warning is-dismissible">
 						<p><b>WP AMP Themes</b> requires that you have the AMP plugin from Automattic active.</p>
 						<p>
-							Please make sure you have the plugin installed and activated. <a href="https://wordpress.org/plugins/amp/">Download the AMP plugin</a>
+							Please make sure you have the plugin installed and activated. <a href="' . get_admin_url() . 'plugin-install.php?s=amp&tab=search&type=term">Download the AMP plugin</a>
 						</p>
 				  </div>';
 		}
@@ -78,7 +73,7 @@ class Admin_Init {
 		$settings_link = '<a href="' . get_admin_url() . 'admin.php?page=wp-amp-themes">' . __( 'Settings' ) . '</a>';
 
 		if ( ! is_plugin_active( 'amp/amp.php' ) ) {
-			$settings_link = '<a href="' . get_admin_url() . 'admin.php?page=wp-amp-instructions"><span style="color:#b30000">' . __( 'Action Required: Get AMP' ) . '</span></a>';
+			$settings_link = '<a href="' . get_admin_url() . 'plugin-install.php?s=amp&tab=search&type=term"><span style="color:#b30000">' . __( 'Action Required: Get AMP' ) . '</span></a>';
 		}
 
 		array_push( $links, $settings_link );
