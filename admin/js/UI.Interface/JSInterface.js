@@ -1,72 +1,69 @@
 /**
  *
- * @author Ardeleanu Ionut
- * @langversion JAVASCRIPT
+ * @author Alexandra Anghel
  *
  * http://www.appticles.com
- * ionut@appticles.com
- * alexandra@appticles.com
  *
  */
- /* Browsers tested: IE6+, Firefox 3+, Opera 8+, Chrome, Safari 4 for windows*/
+/* Browsers tested: IE6+, Firefox 3+, Opera 8+, Chrome, Safari 4 for windows*/
 
 // hack for IE
 if (window.console === undefined) {
-	var console = { log : function(param){ alert(param);} };
+  var console = { log: function (param) { alert(param); } };
 }
 
-var WATJSInterface =  function(){
+var WATJSInterface = function () {
 
-	var objects_arr = new Array();
+  var objects_arr = new Array();
 
-	return{
+  return {
 
-		localpath: '',				    		// domain path
+    localpath: '',				    		// domain path
 
-		AjaxUpload: new WATAjaxUpload(),   		// object that makes the upload of a form without refreshin via AJAX
-		Preloader: new WATPreloader(),  		// the preloader object used for sending data to server through AJAX
-		Loader: new WATLoader(),   				// the object used to display AJAX error messages
+    AjaxUpload: new WATAjaxUpload(),   	// object that makes the upload of a form without refreshin via AJAX
+    Preloader: new WATPreloader(),  		// the preloader object used for sending data to server through AJAX
+    Loader: new WATLoader(),   				  // the object used to display AJAX error messages
 
 
-		/*****************************************************************************************/
-		/*                                      INIT INTERFACE                                   */
-		/*****************************************************************************************/
+    /*****************************************************************************************/
+    /*                                      INIT INTERFACE                                   */
+    /*****************************************************************************************/
 		/**
 		 * initialize the WATJSInterface
 		 * method type: LOCAL
 		 * params: none
 		 */
-		init: function(){
+    init: function () {
 
-			//when document is finish loaded, initialize the interface objects (UI_register, UI_users, UI_comments, etc)
-			jQuery(document).ready(function(){
+      //when document is finish loaded, initialize the interface objects (UI_register, UI_users, UI_comments, etc)
+      jQuery(document).ready(function () {
 
-                WATJSInterface.Loader.init();
-				WATJSInterface.initObjects();
+        WATJSInterface.Loader.init();
+        WATJSInterface.initObjects();
 
-			});
-		},
+      });
+    },
 
 
 
-		/*****************************************************************************************/
-		/*                                      INIT INTERFACE OBJECTS                           */
-		/*****************************************************************************************/
+    /*****************************************************************************************/
+    /*                                      INIT INTERFACE OBJECTS                           */
+    /*****************************************************************************************/
 		/**
 		 * initialize the WATJSInterface objects
 		 * method type: LOCAL
 		 * params: none
 		 */
-		initObjects: function(){
-			for (var i=0; i<objects_arr.length; i++){
-				objects_arr[i].init();
-			}
-		},
+    initObjects: function () {
+      for (var i = 0; i < objects_arr.length; i++) {
+        objects_arr[i].init();
+      }
+    },
 
 
-		/*****************************************************************************************/
-		/*                                   ADD INTERFACE OBJECT                                */
-		/*****************************************************************************************/
+    /*****************************************************************************************/
+    /*                                   ADD INTERFACE OBJECT                                */
+    /*****************************************************************************************/
 		/**
 		 * add an object to the WATJSInterface
 		 * method type: LOCAL
@@ -74,62 +71,62 @@ var WATJSInterface =  function(){
 		 *         @objType : object type like: REGISTER, USERS, COMMENTS, etc
 		 *         @params  : a JSON with params to pass to the new created object. Ex: {'name':'Johnson','age':24}
 		 */
-		add: function(objName, objType, params, iframeWindow){
+    add: function (objName, objType, params, iframeWindow) {
 
-			//find similar object and remove it
-			for (var i=0; i<objects_arr.length; i++){
-				var obj = objects_arr.shift();
-				if (obj === this[objName]){
-					this[objName] = null;
-				}
-				else{
-					objects_arr.push(obj);
-				}
-			}
+      //find similar object and remove it
+      for (var i = 0; i < objects_arr.length; i++) {
+        var obj = objects_arr.shift();
+        if (obj === this[objName]) {
+          this[objName] = null;
+        }
+        else {
+          objects_arr.push(obj);
+        }
+      }
 
-			iframeWindow = (iframeWindow == null) ? window : iframeWindow;
+      iframeWindow = (iframeWindow == null) ? window : iframeWindow;
 
-			//create object
-			this[objName] = new iframeWindow[objType]();
-			if (params != null){
-				for (var property in params){
-					this[objName][property] = params[property];
+      //create object
+      this[objName] = new iframeWindow[objType]();
+      if (params != null) {
+        for (var property in params) {
+          this[objName][property] = params[property];
 
-				}
-			}
-			objects_arr.push(this[objName]);
+        }
+      }
+      objects_arr.push(this[objName]);
 
-		},
+    },
 
 
-		/*****************************************************************************************/
-		/*                                   SCROLL TO FIT SIZE                                  */
-		/*****************************************************************************************/
+    /*****************************************************************************************/
+    /*                                   SCROLL TO FIT SIZE                                  */
+    /*****************************************************************************************/
 		/**
 		 * scroll the document body so that the object fits his entire height inside the body visible area
 		 * method type: LOCAL
 		 * params: @obj : jQuery object such as jQuery(div), jQuery(p) ...
 		 */
-		scrollToFit: function(obj){
+    scrollToFit: function (obj) {
 
-			var container = jQuery('html,body');
-			var scrollTop = parseInt(container.scrollTop());
-			var containerHeight = container.get(0).clientHeight;
-			var objTop = parseInt(obj.offset().top);
-			var objHeight = obj.height();
-			var objBottom = objTop + objHeight;
+      var container = jQuery('html,body');
+      var scrollTop = parseInt(container.scrollTop());
+      var containerHeight = container.get(0).clientHeight;
+      var objTop = parseInt(obj.offset().top);
+      var objHeight = obj.height();
+      var objBottom = objTop + objHeight;
 
-			if (objTop < scrollTop){
-				jQuery(container).animate({scrollTop: objTop }, 1000);
-			}
-			else if (objTop >= scrollTop && objTop < containerHeight+scrollTop){
-				if (objBottom > containerHeight+scrollTop){
-					jQuery(container).animate({scrollTop: objBottom-containerHeight }, 1000);
-				}
-			}
-			else if (objTop >= containerHeight+scrollTop){
-				jQuery(container).animate({scrollTop: objBottom-containerHeight }, 1000);
-			}
-		}
-	}
+      if (objTop < scrollTop) {
+        jQuery(container).animate({ scrollTop: objTop }, 1000);
+      }
+      else if (objTop >= scrollTop && objTop < containerHeight + scrollTop) {
+        if (objBottom > containerHeight + scrollTop) {
+          jQuery(container).animate({ scrollTop: objBottom - containerHeight }, 1000);
+        }
+      }
+      else if (objTop >= containerHeight + scrollTop) {
+        jQuery(container).animate({ scrollTop: objBottom - containerHeight }, 1000);
+      }
+    }
+  };
 }();
