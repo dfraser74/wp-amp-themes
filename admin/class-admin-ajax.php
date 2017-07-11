@@ -1,13 +1,16 @@
 <?php
 namespace WP_AMP_Themes\Admin;
 
+use \WP_AMP_Themes\Includes\Options;
+use \WP_AMP_Themes\Core\Themes_Config;
+
 /**
  * Admin_Ajax class for managing Ajax requests from the admin area of the plugin
  */
 class Admin_Ajax {
 
 	/**
-	 * Update amp themes settings.
+	 * Update theme settings.
 	 */
 	public function settings() {
 
@@ -22,11 +25,15 @@ class Admin_Ajax {
 
 			if ( ! empty( $_POST ) ) {
 
-				$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
-				$wp_amp_themes_config = new \WP_AMP_Themes\Core\Themes_Config();
+				$wp_amp_themes_options = new Options();
+				$wp_amp_themes_config = new Themes_Config();
 
-				if ( isset( $_POST['theme'] ) && in_array( $_POST['theme'], $wp_amp_themes_config->allowed_themes, true ) ) {
+				if ( isset( $_POST['theme'] ) && in_array( $_POST['theme'], $wp_amp_themes_config->allowed_themes, true ) &&
+					isset( $_POST['wp_amp_themes_settings_analyticsid'] ) &&
+					isset( $_POST['wp_amp_themes_settings_facebookappid'] ) &&
+					( $_POST['wp_amp_themes_settings_facebookappid'] == '' || is_numeric($_POST['wp_amp_themes_settings_facebookappid']) ) ) {
 
+					// save theme
 					$new_theme = sanitize_text_field( $_POST['theme'] );
 
 					if ( $new_theme !== $wp_amp_themes_options->get_setting( 'theme' ) ) {
@@ -35,39 +42,36 @@ class Admin_Ajax {
 						$wp_amp_themes_options->update_settings( 'theme', $new_theme );
 
 					}
-				}
 
-				if ( isset( $_POST['analytics_id'] ) ) {
-
-					$new_analytics_id = sanitize_text_field( $_POST['analytics_id'] );
+					// save analytics id
+					$new_analytics_id = sanitize_text_field( $_POST['wp_amp_themes_settings_analyticsid'] );
 
 					if ( $new_analytics_id !== $wp_amp_themes_options->get_setting( 'analytics_id' ) ) {
 
 						$changed = 1;
 						$wp_amp_themes_options->update_settings( 'analytics_id', $new_analytics_id );
 					}
-				}
 
-				if ( isset( $_POST['facebook_app_id'] ) ) {
-
-					$new_facebook_app_id = sanitize_text_field( $_POST['facebook_app_id'] );
+					// save facebook app id
+					$new_facebook_app_id = sanitize_text_field( $_POST['wp_amp_themes_settings_facebookappid'] );
 
 					if ( $new_facebook_app_id !== $wp_amp_themes_options->get_setting( 'facebook_app_id' ) ) {
 
 						$changed = 1;
 						$wp_amp_themes_options->update_settings( 'facebook_app_id', $new_facebook_app_id );
 					}
+
+					if ( $changed ) {
+
+						$response['status'] = 1;
+						$response['message'] = 'Your settings have been successfully modified!';
+
+					} else {
+
+						$response['message'] = 'Your settings have not changed.';
+					}
 				}
 
-				if ( $changed ) {
-
-					$response['status'] = 1;
-					$response['message'] = 'Your AMP Theme settings have been successfully modified!';
-
-				} else {
-
-					$response['message'] = 'Your AMP Theme settings have not changed.';
-				}
 			} // End if().
 
 			echo wp_json_encode( $response );
@@ -77,7 +81,7 @@ class Admin_Ajax {
 	}
 
 	/**
-	 * Subscribe user to mailing list.
+	 * Mark the user as being subscribed to the mailing list.
 	 */
 	public function subscribe() {
 
@@ -89,7 +93,7 @@ class Admin_Ajax {
 
 				if ( isset( $_POST['wp_amp_themes_subscribed'] ) && false != $_POST['wp_amp_themes_subscribed'] ) {
 
-					$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
+					$wp_amp_themes_options = new Options();
 					$subscribed = $wp_amp_themes_options->get_setting( 'joined_subscriber_list' );
 
 					if ( false == $subscribed ) {
