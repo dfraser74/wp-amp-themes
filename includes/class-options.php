@@ -12,7 +12,7 @@ class Options {
 
 	public $options = [
 		'theme' => 'obliq',
-		'joined_subscriber_list' => '',
+		'joined_subscriber_list' => 0,
 		'analytics_id' => '',
 		'facebook_app_id' => ''
 	];
