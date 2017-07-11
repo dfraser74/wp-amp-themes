@@ -89,15 +89,14 @@ class Admin_Ajax {
 
 			if ( isset( $_POST ) && is_array( $_POST ) && ! empty( $_POST ) ) {
 
-				if ( isset( $_POST['wp_amp_themes_subscribed'] ) && '' != $_POST['wp_amp_themes_subscribed'] ) {
+				if ( isset( $_POST['wp_amp_themes_subscribed'] ) && false != $_POST['wp_amp_themes_subscribed'] ) {
 
 					$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
 					$subscribed = $wp_amp_themes_options->get_setting( 'joined_subscriber_list' );
 
-					if ( '' == $subscribed ) {
+					if ( false == $subscribed ) {
 
-						$response['status'] = 1;
-
+						$status = 1;
 						$wp_amp_themes_options->update_settings( 'joined_subscriber_list', $_POST['wp_amp_themes_subscribed'] );
 					}
 				}
