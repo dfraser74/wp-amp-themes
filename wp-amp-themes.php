@@ -8,7 +8,7 @@
  * Author URI: http://ampthemes.io/
  * Version: 0.5
  * Copyright (c) 2017 AMPThemes.io
- * License: The WP is Licensed under the Apache License, Version 2.0
+ * License: The WP AMP Themes plugin is Licensed under the Apache License, Version 2.0
  * Text Domain: wp-amp-themes
  */
 namespace WP_AMP_Themes;
