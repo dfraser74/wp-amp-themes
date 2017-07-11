@@ -25,8 +25,20 @@ class Admin_Init {
 		add_filter( 'plugin_action_links_' . plugin_basename( WP_AMP_THEMES_PLUGIN_PATH . '/wp-amp-themes.php' ), [ $this, 'add_settings_link' ] );
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+
+		add_action( 'customize_controls_print_footer_scripts', [ $this, 'theme_customizer_notice' ] );
 	}
 
+
+	public function theme_customizer_notice() {
+		global $pagenow;
+
+		if ( $pagenow === 'customize.php' && isset( $_GET['customize_amp'] ) && $_GET['customize_amp'] == 1 ) {
+			echo '<div class="notice notice-warning is-dismissible">
+						<p>The Theme Customizer is not implemented yet for WP AMP Themes so your changes will not take effect.</p>
+				  </div>';
+		}
+	}
 
 	/**
 	 * Function that adds the plugin settings button to the wordpress menu side bar.
