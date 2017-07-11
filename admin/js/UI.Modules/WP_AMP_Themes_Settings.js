@@ -9,10 +9,9 @@ function WP_AMP_THEMES_SETTINGS() {
 
   this.send_btn;
 
-
-   /**
-	* Init function called from WATJSInterface
-	*/
+  /**
+   * Init function called from WATJSInterface
+   */
   this.init = function () {
 
     // save a reference to WATJSInterface Object
@@ -31,6 +30,51 @@ function WP_AMP_THEMES_SETTINGS() {
       return;
     }
 
+    this.initValidation();
+  };
+
+
+  /**
+   * Validate form data
+   */
+  this.initValidation = function () {
+
+    jQuery.validator.addMethod('regex', function (value, element, regexp) {
+
+      var re = new RegExp(regexp, 'i');
+
+      return this.optional(element) || re.test(value);
+    },
+      'Your code is invalid'
+    );
+
+    // this is the object that handles the form validations
+    this.validator = jQuery('#' + this.form.id, this.DOMDoc).validate({
+
+      rules: {
+        wp_amp_themes_settings_analyticsid: {
+          regex: '^ua-\\d{4,9}-\\d{1,4}$'
+        },
+        wp_amp_themes_settings_facebookappid: {
+          number: true
+        }
+      },
+
+      // the errorPlacement has to take the table layout into account
+      // all the errors must be handled by containers/divs with custom ids: Ex. "error_fullname_container"
+      errorPlacement: function (error, element) {
+        var split_name = element[0].id.split('_');
+        var id = (split_name.length > 1) ? split_name[split_name.length - 1] : split_name[0];
+        var errorContainer = jQuery('#error_' + id + '_container', JSObject.DOMDoc);
+        error.appendTo(errorContainer);
+      },
+
+      errorElement: 'span'
+    });
+
+    var $GoogleAnalyticsId = jQuery('#' + this.type + '_analyticsid', this.form);
+    $GoogleAnalyticsId.data('holder', $GoogleAnalyticsId.attr('placeholder'));
+    $GoogleAnalyticsId.focusin(function () { jQuery(this).attr('placeholder', ''); }).focusout(function () { jQuery(this).attr('placeholder', jQuery(this).data('holder')); });
   };
 
   /**
@@ -41,7 +85,7 @@ function WP_AMP_THEMES_SETTINGS() {
     jQuery(this.send_btn).unbind('click');
     jQuery(this.send_btn).bind('click', function () {
       JSObject.disableButton(this);
-      JSObject.sendData();
+      JSObject.validate();
     });
     JSObject.enableButton(this.send_btn);
 
@@ -63,6 +107,32 @@ function WP_AMP_THEMES_SETTINGS() {
     jQuery(btn).unbind('click');
     jQuery(btn).animate({ opacity: 0.4 }, 100);
     jQuery(btn).css('cursor', 'default');
+  };
+
+  /**
+	 * Validate data.
+	 */
+  this.validate = function () {
+
+    jQuery(this.form).validate().form();
+
+    // y coordinates of error inputs
+    var arr_errorsYCoord = [];
+
+    // find the y coordinate for the errors
+    for (var name in this.validator.invalid) {
+      var input = jQuery(this.form[name]);
+      arr_errorsYCoord.push(input.offset().top);
+    }
+
+    // if there are no errors from syntax point of view, then send data
+    if (arr_errorsYCoord.length == 0) {
+      JSObject.sendData();
+    }
+    else {
+      // add actions to send, cancel, ... buttons. At this moment the buttons are disabled.
+      JSObject.addButtonsActions();
+    }
   };
 
   /**
@@ -118,11 +188,10 @@ function WP_AMP_THEMES_SETTINGS() {
     // remove preloader
     WATJSInterface.Preloader.remove(100);
 
- 		var parsedJSON = JSON.parse(responseJSON);
+    var parsedJSON = JSON.parse(responseJSON);
     var response = Boolean(Number(String(parsedJSON.status)));
 
-
-		WATJSInterface.Loader.display({ message: parsedJSON.message });
+    WATJSInterface.Loader.display({ message: parsedJSON.message });
 
     // enable form elements
     setTimeout(function () {

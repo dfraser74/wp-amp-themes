@@ -37,10 +37,25 @@ $premium_themes = isset( $premium_content['list'] ) && is_array( $premium_conten
 				<div class="spacer-10"></div>
 
 				<label class="textinput">Google Analytics ID:</label>
-				<input type="text" name="analytics_id" value="<?php echo $analytics_id; ?>"></input> <br/>
+				<input
+					type="text"
+					name="wp_amp_themes_settings_analyticsid"
+					id="wp_amp_themes_settings_analyticsid"
+					value="<?php echo esc_attr($analytics_id); ?>"
+					placeholder="UA-xxxxxx-01"
+				>
+				</input> <br/>
+				<p class="field-message error" id="error_analyticsid_container"></p>
 
 				<label class="textinput">Facebook App ID:</label>
-				<input type="text" name="facebook_app_id" value="<?php echo $facebook_app_id; ?>"></input> <br/>
+				<input
+					type="text"
+					name="wp_amp_themes_settings_facebookappid"
+					id="wp_amp_themes_settings_facebookappid"
+					value="<?php echo esc_attr($facebook_app_id); ?>"
+				>
+				</input> <br/>
+				<p class="field-message error" id="error_facebookappid_container"></p>
 
 				<a href="javascript:void(0)" id="wp_amp_themes_settings_send_btn" class="button button-primary button-large">Save</a>
 			</form>
