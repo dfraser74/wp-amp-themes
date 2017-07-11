@@ -27,15 +27,16 @@
 
 		<?php include( 'post-meta.php' ) ?>
 
-  <!-- End Fullpage Hero -->
-  <main id="content" role="main" class="px3">
+		<!-- End Fullpage Hero -->
+		<main id="content" role="main" class="px3">
 
-	<article class="photo-article ampstart-article-content">
-			<?php echo $this->get( 'post_amp_content' ); // amphtml content; no kses ?>
+			<article class="photo-article ampstart-article-content">
+					<?php echo $this->get( 'post_amp_content' ); // amphtml content; no kses ?>
 
-			<?php include( 'social.php' ); ?>
-	</article>
-  </main>
+					<?php include( 'social.php' ); ?>
+			</article>
+		</main>
 
-</body>
+		<?php do_action( 'amp_post_template_footer', $this ); ?>
+   </body>
 </html>

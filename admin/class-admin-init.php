@@ -25,8 +25,20 @@ class Admin_Init {
 		add_filter( 'plugin_action_links_' . plugin_basename( WP_AMP_THEMES_PLUGIN_PATH . '/wp-amp-themes.php' ), [ $this, 'add_settings_link' ] );
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+
+		add_action( 'customize_controls_print_footer_scripts', [ $this, 'theme_customizer_notice' ] );
 	}
 
+
+	public function theme_customizer_notice() {
+		global $pagenow;
+
+		if ( 'customize.php' === $pagenow && isset( $_GET['customize_amp'] ) && 1 == $_GET['customize_amp'] ) {
+			echo '<div class="notice notice-warning is-dismissible">
+						<p>The Theme Customizer is not implemented yet for WP AMP Themes so your changes will not take effect.</p>
+				  </div>';
+		}
+	}
 
 	/**
 	 * Function that adds the plugin settings button to the wordpress menu side bar.
@@ -88,9 +100,9 @@ class Admin_Init {
 
 		$wp_amp_themes_options = new Options();
 
-		wp_enqueue_style( $wp_amp_themes_options->prefix . 'css_general', plugins_url(WP_AMP_THEMES_DOMAIN.'/admin/css/general.css'), array(), WP_AMP_THEMES_VERSION);
+		wp_enqueue_style( $wp_amp_themes_options->prefix . 'css_general', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/css/general.css' ), [], WP_AMP_THEMES_VERSION );
 
-		$dependencies = array( 'jquery-core', 'jquery-migrate' );
+		$dependencies = [ 'jquery-core', 'jquery-migrate' ];
 
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_validate', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/Lib/jquery.validate.min.js' ), $dependencies, '1.11.1' );
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_validate_additional', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/Lib/validate-additional-methods.min.js' ), $dependencies, '1.11.1' );
@@ -98,7 +110,7 @@ class Admin_Init {
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_ajax_upload', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/AjaxUpload.min.js' ), $dependencies, WP_AMP_THEMES_VERSION );
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_interface', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/JSInterface.min.js' ), $dependencies, WP_AMP_THEMES_VERSION );
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_settings', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Modules/WP_AMP_Themes_Settings.js' ), [], WP_AMP_THEMES_VERSION );
-		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_subscribe', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Modules/WP_AMP_Subscribe.js'), [], WP_AMP_THEMES_VERSION );
+		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_subscribe', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Modules/WP_AMP_Subscribe.js' ), [], WP_AMP_THEMES_VERSION );
 	}
 
 }

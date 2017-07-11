@@ -24,7 +24,7 @@ class Frontend_Init {
 
 		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
 
-		if ( $wp_amp_themes_options->get_setting('analytics_id') !== '' ) {
+		if ( $wp_amp_themes_options->get_setting( 'analytics_id' ) !== '' ) {
 
 			add_filter( 'amp_post_template_analytics', [ $this, 'add_analytics' ] );
 
@@ -54,7 +54,7 @@ class Frontend_Init {
 	public function add_analytics( $analytics ) {
 
 		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
-		$analytics_id = $wp_amp_themes_options->get_setting('analytics_id');
+		$analytics_id = $wp_amp_themes_options->get_setting( 'analytics_id' );
 
 		if ( ! is_array( $analytics ) ) {
 			$analytics = [];
@@ -65,7 +65,7 @@ class Frontend_Init {
 			'attributes' => [],
 			'config_data' => [
 				'vars' => [
-					'account' => $analytics_id
+					'account' => $analytics_id,
 				],
 				'triggers' => [
 					'trackPageview' => [

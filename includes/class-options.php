@@ -14,7 +14,7 @@ class Options {
 		'theme' => 'obliq',
 		'joined_subscriber_list' => 0,
 		'analytics_id' => '',
-		'facebook_app_id' => ''
+		'facebook_app_id' => '',
 	];
 
 
@@ -113,9 +113,7 @@ class Options {
 					return add_option( $this->prefix . $option, $option_value );
 
 				}
-
 			} // End if().
-
 		} // End if().
 
 		return false;
@@ -213,16 +211,16 @@ class Options {
 	}
 
 	/**
-	*
-	* Delete all transients and temporary data when the plugin is deactivated.
-	*
-	*/
-	public function delete_transients()
-	{
-		foreach (array('premium_themes') as $transient_name) {
+	 * Delete all transients and temporary data when the plugin is deactivated.
+	 */
+	public function delete_transients() {
 
-			if (get_transient($this->prefix.$transient_name) !== false)
-				delete_transient($this->prefix.$transient_name);
+		foreach ( [ 'premium_themes' ] as $transient_name) {
+
+			if ( get_transient( $this->prefix . $transient_name ) !== false ) {
+
+				delete_transient( $this->prefix . $transient_name );
+			}
 		}
 	}
 }
