@@ -3,7 +3,7 @@
  /**
  * Plugin Name: WP AMP Themes
  * Plugin URI:  http://wordpress.org/plugins/wp-amp-themes/
- * Description: WP plugin for AMP templates.
+ * Description: The WordPress Accelerated Mobile Pages Themes plugin helps bloggers, publishers and other content creators to easily use various AMP themes on their WordPress websites.
  * Author: AMPThemes.io
  * Author URI: http://ampthemes.io/
  * Version: 0.5
