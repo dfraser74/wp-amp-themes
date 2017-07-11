@@ -10,7 +10,7 @@ gulp.task('admin:processcss', function () {
 
   // Compile SCSS file and write it in the resources folder
   gulp.src('./../admin/sass/general.scss')
-    .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
+    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
     .pipe(gulp.dest('./../admin/css/'));
 });
 
