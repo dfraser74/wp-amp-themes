@@ -35,7 +35,6 @@ class Admin_Ajax {
 						$wp_amp_themes_options->update_settings( 'theme', $new_theme );
 
 					}
-
 				}
 
 				if ( isset( $_POST['analytics_id'] ) ) {
@@ -69,11 +68,10 @@ class Admin_Ajax {
 
 					$response['message'] = 'Your AMP Theme settings have not changed.';
 				}
-
-			}
+			} // End if().
 
 			echo wp_json_encode( $response );
-		}
+		} // End if().
 
 		exit();
 	}

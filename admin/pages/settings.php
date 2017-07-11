@@ -7,7 +7,7 @@ $facebook_app_id = $wp_amp_themes_options->get_setting( 'facebook_app_id' );
 
 $wp_amp_themes_admin_updates = new \WP_AMP_Themes\Admin\Admin_Updates();
 $premium_content = $wp_amp_themes_admin_updates->premium_themes();
-$premium_themes = isset($premium_content['list']) && is_array($premium_content['list']) ? $premium_content['list'] : [];
+$premium_themes = isset( $premium_content['list'] ) && is_array( $premium_content['list'] ) ? $premium_content['list'] : [];
 ?>
 
 <script type="text/javascript">
@@ -29,7 +29,7 @@ $premium_themes = isset($premium_content['list']) && is_array($premium_content['
 			<form name="wp_amp_themes_settings_form" id="wp_amp_themes_settings_form" action="<?php echo admin_url( 'admin-ajax.php' ); ?>?action=wp_amp_themes_settings" method="post">
 				<label class="textinput">Pick your AMP Theme:</label>
 				<div class="theme-box">
-					<img src="<?php echo plugins_url().'/'.WP_AMP_THEMES_DOMAIN.'/admin/images/theme-obliq.jpg';?>" />
+					<img src="<?php echo plugins_url() . '/' . WP_AMP_THEMES_DOMAIN . '/admin/images/theme-obliq.jpg'; ?>" />
 					<p>
 						<input type="radio" name="theme" value="obliq" <?php checked( 'obliq' === $theme ); ?>> Obliq </input><br/>
 					</p>
@@ -46,16 +46,16 @@ $premium_themes = isset($premium_content['list']) && is_array($premium_content['
 			</form>
 			<div class="spacer-20"></div>
 
-			<?php if (count($premium_themes) > 0):?>
+			<?php if ( count( $premium_themes ) > 0 ) : ?>
 
 				<h2>Premium WP AMP Themes</h1>
 				<hr class="separator" />
 
 				<div class="themes">
 					<?php
-						foreach ($premium_themes as $theme){
-							include(WP_AMP_THEMES_PLUGIN_PATH.'admin/sections/theme-box-premium.php');
-						}
+					foreach ( $premium_themes as $theme ) {
+						include( WP_AMP_THEMES_PLUGIN_PATH . 'admin/sections/theme-box-premium.php' );
+					}
 					?>
 				</div>
 
@@ -63,7 +63,7 @@ $premium_themes = isset($premium_content['list']) && is_array($premium_content['
 		</div>
 
 		<div class="right-side">
-			<?php include_once(WP_AMP_THEMES_PLUGIN_PATH . 'admin/sections/subscribe.php'); ?>
+			<?php include_once( WP_AMP_THEMES_PLUGIN_PATH . 'admin/sections/subscribe.php' ); ?>
 			<div class="spacer-0"></div>
 		</div>
 	</div>
