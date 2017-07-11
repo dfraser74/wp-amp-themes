@@ -19,7 +19,7 @@
 	<body>
 		<!-- Start Navbar -->
 		<header class="ampstart-headerbar fixed flex justify-start items-center top-0 left-0 right-0 pl2 pr4">
-			<div role="button" aria-label="open sidebar" on="tap:header-sidebar.toggle" tabindex="0" class="ampstart-navbar-trigger  pr2">☰</div>
+			<div role="button" aria-label="open sidebar" on="tap:header-sidebar.toggle" tabindex="0" class="ampstart-navbar-trigger  pr2">&#9776;</div>
 		</header>
 
 		<?php include( 'side-menu.php' ) ?>
