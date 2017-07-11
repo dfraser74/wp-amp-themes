@@ -10,5 +10,5 @@ define( 'WP_AMP_THEMES_VERSION', '0.5');
 define( 'WP_AMP_THEMES_SUBSCRIPTION_PATH_HTTPS', 'placeholder_https' );
 define( 'WP_AMP_THEMES_SUBSCRIPTION_PATH', 'placeholder_http');
 
-define('WP_AMP_THEMES_THEMES','https://d3oqwjghculspf.cloudfront.net/dashboard/more/more4.json');
-define('WP_AMP_THEMES_THEMES_VERSION', 1);
+define('WP_AMP_THEMES_PREMIUM_THEMES','https://d3oqwjghculspf.cloudfront.net/amp/dashboard/themes.json');
+define('WP_AMP_THEMES_PREMIUM_THEMES_VERSION', 1);

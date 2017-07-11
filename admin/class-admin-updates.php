@@ -31,14 +31,14 @@ class Admin_Updates {
 
 			if (isset($response['content']) && is_array($response['content']) && !empty($response['content'])) {
 
-				if (isset($response['content']['version']) && $response['content']['version'] == WP_AMP_THEMES_THEMES_VERSION) {
+				if (isset($response['content']['version']) && $response['content']['version'] == WP_AMP_THEMES_PREMIUM_THEMES_VERSION) {
 					return $response['content'];
 				}
 			}
 		}
 
 		// JSON URL that should be requested
-		$json_url = WP_AMP_THEMES_THEMES;
+		$json_url = WP_AMP_THEMES_PREMIUM_THEMES;
 
 		// get response
 		$json_response = $this->read_data($json_url);
