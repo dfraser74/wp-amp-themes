@@ -66,62 +66,33 @@ class Admin_Updates {
 
 	/**
 	 *
-	 * Static method used to request the content of different pages using curl or fopen.
-	 * This method returns false if both curl and fopen are dissabled and an empty string ig the json could not be read.
+	 * Method used to request the content of different pages using wp_remote_get.
+	 * This method returns an empty string if the json could not be read.
 	 *
 	 * @param string $json_url
-	 * @return string or bool
+	 * @return string
 	 */
-	public static function read_data( $json_url ) {
+	public function read_data( $json_url ) {
 
-		// Check if curl is enabled.
-		if ( extension_loaded( 'curl' ) ) {
+		$args = [
+			'timeout' => 2,
+			'header' => [
+				'Accept: application/json',
+				'Content-type: application/json',
+			],
+			'sslverify' => false,
+		];
 
-			$send_curl = curl_init( $json_url );
+		$response = wp_remote_get( $json_url, $args );
 
-			// Set curl options.
-			curl_setopt( $send_curl, CURLOPT_URL, $json_url ) ;
-			curl_setopt( $send_curl, CURLOPT_HEADER, false );
-			curl_setopt( $send_curl, CURLOPT_CONNECTTIMEOUT, 2 );
-			curl_setopt( $send_curl, CURLOPT_RETURNTRANSFER, true );
-			curl_setopt( $send_curl, CURLOPT_HTTPHEADER, [ 'Accept: application/json', "Content-type: application/json" ] );
-			curl_setopt( $send_curl, CURLOPT_FAILONERROR, FALSE );
-			curl_setopt( $send_curl, CURLOPT_SSL_VERIFYPEER, FALSE );
-			curl_setopt( $send_curl, CURLOPT_SSL_VERIFYHOST, FALSE );
-			$json_response = curl_exec( $send_curl );
+		$response_json = wp_remote_retrieve_body( $response );
+		$response_status = wp_remote_retrieve_response_code( $response );
 
-			// Get request status.
-			$status = curl_getinfo( $send_curl, CURLINFO_HTTP_CODE );
-			curl_close( $send_curl );
-
-			// Return json if success.
-			if ( 200 == $status ) {
-				return $json_response;
-			}
-
-		} elseif ( ini_get( 'allow_url_fopen' ) ) { // Check if allow_url_fopen is enabled.
-
-			$json_file = fopen( $json_url, 'rb' );
-
-			if ( $json_file ) {
-
-				$json_response = '';
-
-				// Read contents of file.
-				while ( ! feof( $json_file ) ) {
-					$json_response .= fgets( $json_file );
-				}
-			}
-
-			if ( $json_response ) {
-				return $json_response;
-			}
-
-		} else {
-			// Both curl and fopen are disabled.
-			return false;
+		if ( 200 == $response_status ) {
+			return $response_json;
 		}
 
 		return '';
+
 	}
 }
