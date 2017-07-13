@@ -20,8 +20,6 @@ class Frontend_Init {
 
 		add_filter( 'amp_post_template_file', [ $this, 'set_wp_amp_theme_template' ], 10, 3 );
 
-		add_filter( 'amp_post_template_css', [ $this, 'set_wp_amp_theme_css' ] );
-
 		add_action( 'amp_post_template_head', [ $this, 'set_wp_amp_theme_head' ] );
 
 		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
@@ -42,6 +40,11 @@ class Frontend_Init {
 		if ( 'single' === $type ) {
 			$file = WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$theme/single.php";
 		}
+
+		if ( 'style' === $type ) {
+			$file = WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$theme/style.php";
+		}
+
 		return $file;
 	}
 
@@ -51,14 +54,6 @@ class Frontend_Init {
 			<script custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js" async=""></script>
 			<script custom-element="amp-instagram" src="https://cdn.ampproject.org/v0/amp-instagram-0.1.js" async=""></script>
 			<script custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js" async=""></script>';
-	}
-
-	public function set_wp_amp_theme_css( $amp_template ) {
-
-		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
-		$theme = $wp_amp_themes_options->get_setting( 'theme' );
-
-		include( "themes/$theme/style.php" );
 	}
 
 	public function add_analytics( $analytics ) {
