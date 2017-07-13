@@ -1,6 +1,9 @@
 <?php
 
 namespace WP_AMP_Themes\Frontend;
+
+use \WP_AMP_Themes\Includes\Options;
+
 /**
  * Frontend_Init class for initializing the admin area of the WP AMP Themes plugin.
  *
@@ -22,7 +25,7 @@ class Frontend_Init {
 
 		add_action( 'amp_post_template_head', [ $this, 'set_wp_amp_theme_head' ] );
 
-		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
+		$wp_amp_themes_options = new Options();
 
 		if ( $wp_amp_themes_options->get_setting( 'analytics_id' ) !== '' ) {
 
@@ -34,7 +37,7 @@ class Frontend_Init {
 
 	public function set_wp_amp_theme_template( $file, $type, $post ) {
 
-		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
+		$wp_amp_themes_options = new Options();
 		$theme = $wp_amp_themes_options->get_setting( 'theme' );
 
 		if ( 'single' === $type ) {
@@ -59,9 +62,15 @@ class Frontend_Init {
 			<script custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js" async=""></script>';
 	}
 
+	/**
+	* Add Google Analytics ID to the template.
+	*
+	* @param array $analytics
+	* @return array
+	*/
 	public function add_analytics( $analytics ) {
 
-		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
+		$wp_amp_themes_options = new Options();
 		$analytics_id = $wp_amp_themes_options->get_setting( 'analytics_id' );
 
 		if ( ! is_array( $analytics ) ) {
