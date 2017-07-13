@@ -18,7 +18,7 @@
 			<div role="button" aria-label="open sidebar" on="tap:header-sidebar.toggle" tabindex="0" class="ampstart-navbar-trigger  pr2">&#9776;</div>
 		</header>
 
-		<?php include( 'side-menu.php' ) ?>
+		<?php $this->load_parts( array( 'side-menu' ) ); ?>
 		<!-- End Navbar -->
 
 		<?php include( 'post-meta.php' ) ?>
@@ -27,9 +27,9 @@
 		<main id="content" role="main" class="px3">
 
 			<article class="photo-article ampstart-article-content">
-					<?php echo $this->get( 'post_amp_content' ); // amphtml content; no kses ?>
+				<?php echo $this->get( 'post_amp_content' ); // amphtml content; no kses ?>
 
-					<?php include( 'social.php' ); ?>
+				<?php include( 'social.php' ); ?>
 			</article>
 		</main>
 

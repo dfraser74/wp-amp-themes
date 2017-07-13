@@ -45,6 +45,10 @@ class Frontend_Init {
 			$file = WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$theme/style.php";
 		}
 
+		if ( 'side-menu' === $type ) {
+			$file = WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$theme/side-menu.php";
+		}
+
 		return $file;
 	}
 
