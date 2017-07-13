@@ -37,19 +37,32 @@ class Frontend_Init {
 		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
 		$theme = $wp_amp_themes_options->get_setting( 'theme' );
 
-		if ( 'single' === $type ) {
-			$file = WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$theme/single.php";
+		switch ( $type ) {
+
+			case 'single' :
+				return WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$theme/single.php";
+
+			case 'style' :
+				return WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$theme/style.php";
+
+			case 'side-menu' :
+				return WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$theme/side-menu.php";
+
+			case 'featured-image' :
+				return WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$theme/featured-image.php";
+
+			case 'meta-categories' :
+				return WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$theme/meta-categories.php";
+
+			case 'meta-author-date' :
+				return WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$theme/meta-author-date.php";
+
+			default :
+				return $file;
+
+
 		}
 
-		if ( 'style' === $type ) {
-			$file = WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$theme/style.php";
-		}
-
-		if ( 'side-menu' === $type ) {
-			$file = WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$theme/side-menu.php";
-		}
-
-		return $file;
 	}
 
 	public function set_wp_amp_theme_head ( $amp_template ) {
