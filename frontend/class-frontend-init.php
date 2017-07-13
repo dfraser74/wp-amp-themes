@@ -37,6 +37,14 @@ class Frontend_Init {
 		add_filter( 'amp_content_embed_handlers', [ $this, 'set_wp_amp_post_social_embed' ], 10, 2 );
 	}
 
+	/**
+	* Callback for loading the custom template together with its parts.
+	*
+	* @param $file
+	* @param $type
+	* @param $post
+	* @return string
+	*/
 	public function set_wp_amp_theme_template( $file, $type, $post ) {
 
 		$wp_amp_themes_options = new Options();
