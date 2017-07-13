@@ -1,6 +1,9 @@
 <?php
 
 namespace WP_AMP_Themes\Frontend;
+
+use \WP_AMP_Themes\Includes\Options;
+
 /**
  * Frontend_Init class for initializing the admin area of the WP AMP Themes plugin.
  *
@@ -16,13 +19,14 @@ class Frontend_Init {
 	}
 
 
+	/**
+	* Load a custom AMP template on top of the AMP plugin.
+	*/
 	public function integrate_template() {
 
 		add_filter( 'amp_post_template_file', [ $this, 'set_wp_amp_theme_template' ], 10, 3 );
 
-		add_action( 'amp_post_template_head', [ $this, 'set_wp_amp_theme_head' ] );
-
-		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
+		$wp_amp_themes_options = new Options();
 
 		if ( $wp_amp_themes_options->get_setting( 'analytics_id' ) !== '' ) {
 
@@ -30,11 +34,12 @@ class Frontend_Init {
 
 		}
 
+		add_filter( 'amp_content_embed_handlers', [ $this, 'set_wp_amp_post_social_embed' ], 10, 2 );
 	}
 
 	public function set_wp_amp_theme_template( $file, $type, $post ) {
 
-		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
+		$wp_amp_themes_options = new Options();
 		$theme = $wp_amp_themes_options->get_setting( 'theme' );
 
 		switch ( $type ) {
@@ -65,16 +70,29 @@ class Frontend_Init {
 
 	}
 
-	public function set_wp_amp_theme_head ( $amp_template ) {
 
-		echo '<script custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js" async=""></script>
-			<script custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js" async=""></script>
-			<script custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js" async=""></script>';
+	/**
+	* Add filter for adding the social media share buttons to a post
+	*
+	* @param $embed_handler_classes
+	* @param $post
+	*/
+	public function set_wp_amp_post_social_embed( $embed_handler_classes, $post ) {
+		require_once( dirname( __FILE__ ) . '/class-embed-handler.php' );
+		$embed_handler_classes[ 'WAT_Social_Media_Embed_Handler' ] = array();
+		return $embed_handler_classes;
 	}
 
+
+	/**
+	* Add Google Analytics ID to the template.
+	*
+	* @param array $analytics
+	* @return array
+	*/
 	public function add_analytics( $analytics ) {
 
-		$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
+		$wp_amp_themes_options = new Options();
 		$analytics_id = $wp_amp_themes_options->get_setting( 'analytics_id' );
 
 		if ( ! is_array( $analytics ) ) {
