@@ -54,7 +54,6 @@
 
 amp-iframe,
 amp-youtube,
-amp-instagram,
 amp-vine {
 	background: "#c2c2c2";
 	margin: 0 -16px 1.5em;
