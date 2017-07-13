@@ -1,5 +1,10 @@
 <?php
 	$post_author = $this->get( 'post_author' );
+
+	if ( ! $post_author ) {
+		return;
+	}
+
 	$date = date_i18n( 'F j, Y', $this->get( 'post_publish_timestamp' ) );
 	$url = get_author_posts_url( $post_author->ID );
 ?>
