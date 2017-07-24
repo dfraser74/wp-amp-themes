@@ -1,4 +1,29 @@
+<?php
+namespace WP_AMP_Themes\Frontend\Themes\Obliq;
 
+use \WP_AMP_Themes\Includes\Utils;
+
+$utils = new Utils();
+
+$base_text_color = sanitize_hex_color( $this->get_customizer_setting( 'base_text_color' ) );
+$post_title_text_color = sanitize_hex_color( $this->get_customizer_setting( 'post_title_text_color' ) );
+$post_meta_text_color = sanitize_hex_color( $this->get_customizer_setting( 'post_meta_text_color' ) );
+$label_text_color = sanitize_hex_color( $this->get_customizer_setting( 'label_text_color' ) );
+$label_bg_color = sanitize_hex_color( $this->get_customizer_setting( 'label_bg_color' ) );
+$icons_color = sanitize_hex_color( $this->get_customizer_setting( 'icons_color' ) );
+$sidemenu_bg_color = sanitize_hex_color( $this->get_customizer_setting( 'sidemenu_bg_color' ) );
+$sidemenu_text_color = sanitize_hex_color( $this->get_customizer_setting( 'sidemenu_text_color' ) );
+$article_bg_color_hex = sanitize_hex_color( $this->get_customizer_setting( 'article_bg_color' ) );
+$twitter_bg_color = sanitize_hex_color( $this->get_customizer_setting( 'twitter_bg_color' ) );
+$fb_bg_color = sanitize_hex_color( $this->get_customizer_setting( 'fb_bg_color' ) );
+$gplus_bg_color = sanitize_hex_color( $this->get_customizer_setting( 'gplus_bg_color' ) );
+$pinterest_bg_color = sanitize_hex_color( $this->get_customizer_setting( 'pinterest_bg_color' ) );
+$email_bg_color = sanitize_hex_color( $this->get_customizer_setting( 'email_bg_color' ) );
+$header_bg_color = sanitize_hex_color( $this->get_customizer_setting( 'header_bg_color' ) );
+
+$article_bg_color_rgb = $utils->hex_to_rgb( $article_bg_color_hex );
+
+?>
 * Generic WP styling */
 
 .alignright {
@@ -549,7 +574,7 @@ h1,h2,h3,h4,h5,h6,p {
 
 body {
   background: #fff;
-  color: #4a4a4a;
+  color: <?php echo $base_text_color; ?>;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Arial, sans-serif;
   min-width: 315px;
   overflow-x: hidden;
@@ -565,7 +590,9 @@ main {
 amp-carousel .ampstart-image-with-caption {
   margin-bottom: 0;
 }
-
+#content {
+	background-color: <?php echo $article_bg_color_hex; ?>;
+}
 #content:target {
   margin-top: calc(0px - 3.5rem);
   padding-top: 3.5rem;
@@ -690,13 +717,14 @@ a,a:active,a:visited {
     opacity: 1;
   }
 }
-
 .ampstart-headerbar {
-  background-color: transparent;
   color: #000;
   z-index: 999;
+	background-color: <?php echo $header_bg_color; ?>;
 }
-
+.ampstart-headerbar.has-image {
+  background-color: transparent;
+}
 .ampstart-headerbar+:not(amp-sidebar) {
   margin-top: 0;
 }
@@ -718,39 +746,43 @@ a,a:active,a:visited {
   flex: 1;
 }
 
-.ampstart-header {
-  color: #000;
-}
-
 .ampstart-header-inner {
-  background: -webkit-linear-gradient(bottom, #fff, rgba(255, 255, 255, .8) 70%, rgba(255, 255, 255, .7));
-  background: -moz-linear-gradient(bottom, #fff, rgba(255, 255, 255, .8) 70%, rgba(255, 255, 255, .7));
-  background: -o-linear-gradient(bottom, #fff, rgba(255, 255, 255, .8) 70%, rgba(255, 255, 255, .7));
-  background: linear-gradient(bottom, #fff, rgba(255, 255, 255, .8) 70%, rgba(255, 255, 255, .7));
-  background: -ms-linear-gradient(bottom, #fff 0, rgba(255, 255, 255, .8) 70%, rgba(255, 255, 255, .7));
+  background: -webkit-linear-gradient(bottom, <?php echo $article_bg_color_hex; ?>, rgba(<?php echo $article_bg_color_rgb; ?>, .8) 70%, rgba(<?php echo $article_bg_color_rgb; ?>, .7));
+  background: -moz-linear-gradient(bottom, <?php echo $article_bg_color_hex; ?>, rgba(<?php echo $article_bg_color_rgb; ?>, .8) 70%, rgba(<?php echo $article_bg_color_rgb; ?>, .7));
+  background: -o-linear-gradient(bottom, <?php echo $article_bg_color_hex; ?>, rgba(<?php echo $article_bg_color_rgb; ?>, .8) 70%, rgba(<?php echo $article_bg_color_rgb; ?>, .7));
+  background: linear-gradient(bottom, <?php echo $article_bg_color_hex; ?>, rgba(<?php echo $article_bg_color_rgb; ?>, .8) 70%, rgba(<?php echo $article_bg_color_rgb; ?>, .7));
+  background: -ms-linear-gradient(bottom, <?php echo $article_bg_color_hex; ?> 0, rgba(<?php echo $article_bg_color_rgb; ?>, .8) 70%, rgba(<?php echo $article_bg_color_rgb; ?>, .7));
+}
+.ampstart-header-inner h3 {
+	color: <?php echo $post_title_text_color; ?>;
 }
 
 .ampstart-header-inner a {
-  color: #63a9dd;
+  color: <?php echo $label_bg_color; ?>;
 }
-
 .ampstart-header-category {
   padding: 1px 3px;
-  color: #fff;
-  background: #63a9dd;
+  color: <?php echo $label_text_color; ?>;
+  background: <?php echo $label_bg_color; ?>;
 }
-
+.ampstart-header-meta {
+	color: <?php echo $post_meta_text_color; ?>;
+}
 .ampstart-header-obliq {
   width: 0;
   height: 0;
   border-bottom-width: 1rem;
   border-right: 100vw solid transparent;
   border-bottom-style: solid;
-  border-bottom-color: rgba(255, 255, 255, .7);
+  border-bottom-color: rgba(<?php echo $article_bg_color_rgb; ?>, .7);
 }
 
 .ampstart-header-title {
   border-bottom: 1px solid #f0f0f0;
+}
+
+.ampstart-article-content {
+	color: <?php echo $base_text_color; ?>;
 }
 
 .ampstart-navbar-trigger {
@@ -773,15 +805,15 @@ a,a:active,a:visited {
 
 .ampstart-nav-dropdown .ampstart-dropdown-item,.ampstart-nav-dropdown .ampstart-dropdown>section>header {
   background-color: transparent;
-  color: #000;
+  color: <?php echo $sidemenu_text_color; ?>;
 }
 
 .ampstart-nav-dropdown .ampstart-dropdown-item {
-  color: #003f93;
+  color: <?php echo $sidemenu_text_color; ?>;
 }
 
 .ampstart-nav-dropdown .ampstart-dropdown-item a {
-  color: #000000;
+  color: <?php echo $sidemenu_text_color; ?>;
   font-weight: 900;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -789,19 +821,25 @@ a,a:active,a:visited {
 }
 
 .ampstart-sidebar {
-  background-color: #f0f0f0;
-  color: #000;
+  background-color: <?php echo $sidemenu_bg_color; ?>;
+  color: <?php echo $sidemenu_text_color; ?>;
   min-width: 300px;
   width: 300px;
 }
 
 .ampstart-sidebar .ampstart-icon {
-  fill: #4a4a4a;
+  fill: <?php echo $icons_color; ?>;
 }
 
 .ampstart-sidebar-header {
   line-height: 3.5rem;
   min-height: 3.5rem;
+}
+.ampstart-logo-wrap {
+	width: 60px;
+	height: auto;
+	max-height: 100px;
+	margin: 3rem auto;
 }
 
 .ampstart-sidebar .ampstart-nav-item {
@@ -843,7 +881,7 @@ a,a:active,a:visited {
   display: inline-block;
   content: "+";
   padding: 0 0 0 1.5rem;
-  color: #4a4a4a;
+  color: <?php echo $icons_color; ?>;
   float: right;
 }
 
@@ -875,19 +913,19 @@ a,a:active,a:visited {
   border-bottom-width: 2rem;
   border-right: 100vw solid transparent;
   border-bottom-style: solid;
-  border-bottom-color: rgba(255, 255, 255, 1);
+  border-bottom-color: rgba(<?php echo $article_bg_color_rgb; ?>, 1);
 }
 
 .ampstart-navbar-trigger {
-  color: #4a4a4a;
+  color: <?php echo $icons_color; ?>;
 }
 
 .ampstart-navbar-close {
-  color: #4a4a4a;
+  color: $<?php echo $icons_color; ?>;
 }
 
 .ampstart-static-close {
-  color: #4a4a4a;
+  color: <?php echo $icons_color; ?>;
   top: 0.1rem;
   right: 0.1rem;
 }
@@ -908,4 +946,19 @@ a,a:active,a:visited {
 
 amp-social-share {
   margin-right: 5px;
+}
+.amp-social-share-twitter {
+  background-color: <?php echo $twitter_bg_color; ?>;
+}
+.amp-social-share-facebook {
+  background-color: <?php echo $fb_bg_color; ?>;
+}
+.amp-social-share-gplus {
+  background-color: <?php echo $gplus_bg_color; ?>;
+}
+.amp-social-share-pinterest {
+  background-color: <?php echo $pinterest_bg_color; ?>;
+}
+.amp-social-share-email {
+    background-color: <?php echo $email_bg_color; ?>;
 }

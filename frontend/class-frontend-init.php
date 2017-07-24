@@ -20,8 +20,8 @@ class Frontend_Init {
 
 
 	/**
-	* Load a custom AMP template on top of the AMP plugin.
-	*/
+	 * Load a custom AMP template on top of the AMP plugin.
+	 */
 	public function integrate_template() {
 
 		add_filter( 'amp_post_template_file', [ $this, 'set_wp_amp_theme_template' ], 10, 3 );
@@ -38,13 +38,13 @@ class Frontend_Init {
 	}
 
 	/**
-	* Callback for loading the custom template together with its parts.
-	*
-	* @param $file
-	* @param $type
-	* @param $post
-	* @return string
-	*/
+	 * Callback for loading the custom template together with its parts.
+	 *
+	 * @param $file
+	 * @param $type
+	 * @param $post
+	 * @return string
+	 */
 	public function set_wp_amp_theme_template( $file, $type, $post ) {
 
 		$wp_amp_themes_options = new Options();
@@ -73,31 +73,30 @@ class Frontend_Init {
 			default :
 				return $file;
 
-
 		}
 
 	}
 
 
 	/**
-	* Add filter for adding the social media share buttons to a post
-	*
-	* @param $embed_handler_classes
-	* @param $post
-	*/
+	 * Add filter for adding the social media share buttons to a post
+	 *
+	 * @param $embed_handler_classes
+	 * @param $post
+	 */
 	public function set_wp_amp_post_social_embed( $embed_handler_classes, $post ) {
 		require_once( dirname( __FILE__ ) . '/class-embed-handler.php' );
-		$embed_handler_classes[ 'WAT_Social_Media_Embed_Handler' ] = array();
+		$embed_handler_classes['WAT_Social_Media_Embed_Handler'] = array();
 		return $embed_handler_classes;
 	}
 
 
 	/**
-	* Add Google Analytics ID to the template.
-	*
-	* @param array $analytics
-	* @return array
-	*/
+	 * Add Google Analytics ID to the template.
+	 *
+	 * @param array $analytics
+	 * @return array
+	 */
 	public function add_analytics( $analytics ) {
 
 		$wp_amp_themes_options = new Options();

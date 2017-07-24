@@ -26,18 +26,6 @@ class Admin_Init {
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 
-		add_action( 'customize_controls_print_footer_scripts', [ $this, 'theme_customizer_notice' ] );
-	}
-
-
-	public function theme_customizer_notice() {
-		global $pagenow;
-
-		if ( 'customize.php' === $pagenow && isset( $_GET['customize_amp'] ) && 1 == $_GET['customize_amp'] ) {
-			echo '<div class="notice notice-warning is-dismissible">
-						<p>The Theme Customizer is not implemented yet for WP AMP Themes so your changes will not take effect.</p>
-				  </div>';
-		}
 	}
 
 	/**

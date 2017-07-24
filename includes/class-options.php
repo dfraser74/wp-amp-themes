@@ -201,7 +201,7 @@ class Options {
 
 			} elseif ( is_string( $option ) ) {
 
-				if ( array_key_exists( $option, $this->options ) ) {
+				if ( array_key_exists( $option, $this->options ) || $option === 'customize' ) {
 
 					return delete_option( $this->prefix . $option );
 

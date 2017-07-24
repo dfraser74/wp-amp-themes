@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'WAT_Social_Media_Embed_Handler' => $baseDir . '/frontend/class-embed-handler.php',
     'WP_AMP_Themes\\Admin\\Admin_Ajax' => $baseDir . '/admin/class-admin-ajax.php',
     'WP_AMP_Themes\\Admin\\Admin_Init' => $baseDir . '/admin/class-admin-init.php',
     'WP_AMP_Themes\\Admin\\Admin_Updates' => $baseDir . '/admin/class-admin-updates.php',
@@ -13,4 +14,6 @@ return array(
     'WP_AMP_Themes\\Core\\WP_AMP_Themes' => $baseDir . '/core/class-wp-amp-themes.php',
     'WP_AMP_Themes\\Frontend\\Frontend_Init' => $baseDir . '/frontend/class-frontend-init.php',
     'WP_AMP_Themes\\Includes\\Options' => $baseDir . '/includes/class-options.php',
+    'WP_AMP_Themes\\Includes\\Utils' => $baseDir . '/includes/class-utils.php',
+    'WP_AMP_Themes\\Includes\\WP_AMP_Customizer_Init' => $baseDir . '/includes/class-wp-amp-customizer-init.php',
 );

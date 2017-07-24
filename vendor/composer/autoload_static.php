@@ -7,6 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInitca8785c04f197d9ab91fffbccdb945c7
 {
     public static $classMap = array (
+        'WAT_Social_Media_Embed_Handler' => __DIR__ . '/../..' . '/frontend/class-embed-handler.php',
         'WP_AMP_Themes\\Admin\\Admin_Ajax' => __DIR__ . '/../..' . '/admin/class-admin-ajax.php',
         'WP_AMP_Themes\\Admin\\Admin_Init' => __DIR__ . '/../..' . '/admin/class-admin-init.php',
         'WP_AMP_Themes\\Admin\\Admin_Updates' => __DIR__ . '/../..' . '/admin/class-admin-updates.php',
@@ -14,6 +15,8 @@ class ComposerStaticInitca8785c04f197d9ab91fffbccdb945c7
         'WP_AMP_Themes\\Core\\WP_AMP_Themes' => __DIR__ . '/../..' . '/core/class-wp-amp-themes.php',
         'WP_AMP_Themes\\Frontend\\Frontend_Init' => __DIR__ . '/../..' . '/frontend/class-frontend-init.php',
         'WP_AMP_Themes\\Includes\\Options' => __DIR__ . '/../..' . '/includes/class-options.php',
+        'WP_AMP_Themes\\Includes\\Utils' => __DIR__ . '/../..' . '/includes/class-utils.php',
+        'WP_AMP_Themes\\Includes\\WP_AMP_Customizer_Init' => __DIR__ . '/../..' . '/includes/class-wp-amp-customizer-init.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

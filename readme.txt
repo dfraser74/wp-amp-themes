@@ -3,7 +3,7 @@ Contributors: anghelalexandra, abarbulescu
 Tags: amp, accelerated mobile pages, mobile, mobile web, mobile internet, smartphone, iphone, android, windows, webkit, chrome, safari, mobile web app, html5, responsive ui, themes
 Requires at least: 4.4
 Tested up to: 4.8
-Stable tag: 0.5
+Stable tag: 1.0
 License: GPLv2 or later
 
 WP AMP Themes helps you improve mobile user engagement with fast, compelling experiences. Discover Accelerated Mobile Pages HTML themes and get up and running by integrating them into your WordPress with ease.
@@ -74,6 +74,9 @@ If a user clicks on an AMP link, the AMP content is loaded directly in the brows
 After viewing the AMP page, users can click on links in the article or return to Google search by clicking the back arrow.
 
 == Changelog ==
+
+= 1.0 =
+* Added colors and logo to theme customizer.
 
 = 0.5 =
 * Beta release

@@ -6,7 +6,7 @@
  * Description: The WordPress Accelerated Mobile Pages Themes plugin helps bloggers, publishers and other content creators to easily use various AMP themes on their WordPress websites.
  * Author: AMPThemes.io
  * Author URI: http://ampthemes.io/
- * Version: 0.5
+ * Version: 1.0
  * Copyright (c) 2017 AMPThemes.io
  * License: The WP AMP Themes plugin is Licensed under the Apache License, Version 2.0
  * Text Domain: wp-amp-themes
@@ -19,9 +19,12 @@ require_once 'core/config.php';
 global $wp_amp_themes;
 $wp_amp_themes  = new Core\WP_AMP_Themes();
 
+
 function wp_amp_themes_admin_init() {
 	new Admin\Admin_Init();
 }
+
+new Includes\WP_AMP_Customizer_Init();
 
 function wp_amp_themes_frontend_init() {
 	new Frontend\Frontend_Init();
@@ -29,6 +32,7 @@ function wp_amp_themes_frontend_init() {
 
 register_activation_hook( __FILE__, [ &$wp_amp_themes, 'activate' ] );
 register_deactivation_hook( __FILE__, [ &$wp_amp_themes, 'deactivate' ] );
+
 
 if ( is_admin() ) {
 

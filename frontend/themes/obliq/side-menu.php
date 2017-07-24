@@ -53,6 +53,9 @@
 					<!-- End Dropdown-inline -->
 				</li>
 			</ul>
+			<div class="ampstart-logo-wrap">
+				<amp-img layout="responsive" class="" width="30" height="30" src="<?php echo esc_url( $this->get_customizer_setting( 'logo' ) ); ?>"></amp-img>
+			</div>
 		</nav>
 	</div>
 </amp-sidebar>

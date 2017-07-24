@@ -29,9 +29,12 @@ $premium_themes = isset( $premium_content['list'] ) && is_array( $premium_conten
 			<form name="wp_amp_themes_settings_form" id="wp_amp_themes_settings_form" action="<?php echo admin_url( 'admin-ajax.php' ); ?>?action=wp_amp_themes_settings" method="post">
 				<label class="textinput">Pick your AMP Theme:</label>
 				<div class="theme-box">
-					<img src="<?php echo plugins_url() . '/' . WP_AMP_THEMES_DOMAIN . '/admin/images/theme-obliq.jpg'; ?>" />
-					<p>
+					<img src="<?php echo plugins_url() . '/' . WP_AMP_THEMES_DOMAIN . '/admin/images/theme-obliq.png'; ?>" />
+					<div class="name theme-picker-select">
 						<input type="radio" name="theme" value="obliq" <?php checked( 'obliq' === $theme ); ?>> Obliq </input><br/>
+					</div>
+					<p>
+						<a href="<?php echo esc_url( admin_url( 'customize.php?autofocus[section]=amp_design&customize_amp=1' ) ); ?>" class="button customize-button">Customize</a>
 					</p>
 				</div>
 				<div class="spacer-10"></div>
@@ -56,7 +59,6 @@ $premium_themes = isset( $premium_content['list'] ) && is_array( $premium_conten
 				>
 				</input> <br/>
 				<p class="field-message error" id="error_facebookappid_container"></p>
-
 				<a href="javascript:void(0)" id="wp_amp_themes_settings_send_btn" class="button button-primary button-large">Save</a>
 			</form>
 			<div class="spacer-20"></div>
