@@ -26,22 +26,10 @@ class Admin_Ajax {
 			if ( ! empty( $_POST ) ) {
 
 				$wp_amp_themes_options = new Options();
-				$wp_amp_themes_config = new Themes_Config();
 
-				if ( isset( $_POST['theme'] ) && in_array( $_POST['theme'], $wp_amp_themes_config->allowed_themes, true ) &&
-					isset( $_POST['wp_amp_themes_settings_analyticsid'] ) &&
+				if ( isset( $_POST['wp_amp_themes_settings_analyticsid'] ) &&
 					isset( $_POST['wp_amp_themes_settings_facebookappid'] ) &&
 					( $_POST['wp_amp_themes_settings_facebookappid'] == '' || is_numeric($_POST['wp_amp_themes_settings_facebookappid']) ) ) {
-
-					// save theme
-					$new_theme = sanitize_text_field( $_POST['theme'] );
-
-					if ( $new_theme !== $wp_amp_themes_options->get_setting( 'theme' ) ) {
-
-						$changed = 1;
-						$wp_amp_themes_options->update_settings( 'theme', $new_theme );
-
-					}
 
 					// save analytics id
 					$new_analytics_id = sanitize_text_field( $_POST['wp_amp_themes_settings_analyticsid'] );
@@ -110,6 +98,81 @@ class Admin_Ajax {
 
 		exit();
 	}
+
+	/**
+	 * Switch the user theme.
+	 */
+	public function switch_theme() {
+
+		if ( current_user_can( 'manage_options' ) ){
+			$response = 0;
+
+			if ( ! empty( $_GET ) ) {
+
+				$wp_amp_themes_config = new Themes_Config();
+
+				if ( isset( $_GET['theme'] ) && in_array( $_GET['theme'], $wp_amp_themes_config->allowed_themes, true ) ) {
+
+					$wp_amp_themes_options = new Options();
+					$new_theme = sanitize_text_field( $_GET['theme'] );
+					$wp_amp_themes_options->update_settings( 'customize', [] );
+					$wp_amp_themes_options->update_settings( 'theme', $new_theme );
+
+					$response = 1;
+				}
+
+			}
+
+			echo $response;
+
+		}
+
+		exit();
+	}
+
+	/**
+	 * Register installed premium themes in the database.
+	 */
+	 public function sync() {
+
+		if ( current_user_can( 'manage_options' ) ) {
+
+			$response = [
+				'status' => 0,
+				'message' => 'There was an error. Please reload the page and try again.',
+			];
+
+			$wp_amp_themes_options = new Options();
+			$installed_themes = $wp_amp_themes_options->get_setting( 'installed_themes' );
+
+			$wp_amp_themes_config = new Themes_Config();
+			$allowed_themes = $wp_amp_themes_config->allowed_themes;
+
+			$new_installed_themes = [];
+
+			foreach ( $allowed_themes as $allowed_theme ) {
+
+				if ( is_dir( WP_AMP_THEMES_PLUGIN_PATH . "frontend/themes/$allowed_theme/") ) {
+					$new_installed_themes[] = $allowed_theme;
+				}
+			}
+
+			if ( $installed_themes === $new_installed_themes ) {
+				$response['message'] = 'No new premium themes installed.';
+
+			} else {
+
+				$wp_amp_themes_options->update_settings( 'installed_themes', $new_installed_themes );
+				$response['message'] = 'Sync complete. Your new themes have been registered.';
+				$response['status'] = 1;
+			}
+
+			echo wp_json_encode( $response );
+		}
+
+		exit();
+
+	 }
 
 
 }

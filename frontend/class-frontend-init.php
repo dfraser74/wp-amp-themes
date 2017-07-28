@@ -24,9 +24,14 @@ class Frontend_Init {
 	 */
 	public function integrate_template() {
 
-		add_filter( 'amp_post_template_file', [ $this, 'set_wp_amp_theme_template' ], 10, 3 );
-
 		$wp_amp_themes_options = new Options();
+
+		if ( $wp_amp_themes_options->get_setting( 'theme' ) !== 'default' ) {
+
+			add_filter( 'amp_post_template_file', [ $this, 'set_wp_amp_theme_template' ], 10, 3 );
+			add_filter( 'amp_content_embed_handlers', [ $this, 'set_wp_amp_post_social_embed' ], 10, 2 );
+		}
+
 
 		if ( $wp_amp_themes_options->get_setting( 'analytics_id' ) !== '' ) {
 
@@ -34,7 +39,6 @@ class Frontend_Init {
 
 		}
 
-		add_filter( 'amp_content_embed_handlers', [ $this, 'set_wp_amp_post_social_embed' ], 10, 2 );
 	}
 
 	/**

@@ -15,6 +15,8 @@ class Options {
 		'joined_subscriber_list' => 0,
 		'analytics_id' => '',
 		'facebook_app_id' => '',
+		'customize' => [],
+		'installed_themes' => [ 'obliq' ],
 	];
 
 

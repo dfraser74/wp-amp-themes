@@ -6,7 +6,10 @@ use \WP_AMP_Themes\Includes\Options;
 class Themes_Config {
 
 	public $allowed_themes = [
-		'obliq'
+		'default',
+		'obliq',
+		'ghost',
+		'palm',
 	];
 
 

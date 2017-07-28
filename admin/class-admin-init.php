@@ -88,7 +88,7 @@ class Admin_Init {
 
 		$wp_amp_themes_options = new Options();
 
-		wp_enqueue_style( $wp_amp_themes_options->prefix . 'css_general', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/css/general.css' ), [], WP_AMP_THEMES_VERSION );
+		wp_enqueue_style( $wp_amp_themes_options->prefix . 'css_general', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/css/general-1_1.css' ), [], WP_AMP_THEMES_VERSION );
 
 		$dependencies = [ 'jquery-core', 'jquery-migrate' ];
 
@@ -98,7 +98,9 @@ class Admin_Init {
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_ajax_upload', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/AjaxUpload.min.js' ), $dependencies, WP_AMP_THEMES_VERSION );
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_interface', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Interface/JSInterface.min.js' ), $dependencies, WP_AMP_THEMES_VERSION );
 		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_settings', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Modules/WP_AMP_Themes_Settings.min.js' ), [], WP_AMP_THEMES_VERSION );
-		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_subscribe', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Modules/WP_AMP_Subscribe.min.js' ), [], WP_AMP_THEMES_VERSION );
+		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_subscribe', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Modules/WP_AMP_Themes_Subscribe.min.js' ), [], WP_AMP_THEMES_VERSION );
+		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_sync', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Modules/WP_AMP_Themes_Sync.min.js' ), [], WP_AMP_THEMES_VERSION );
+		wp_enqueue_script( $wp_amp_themes_options->prefix . 'js_switcher', plugins_url( WP_AMP_THEMES_DOMAIN . '/admin/js/UI.Modules/WP_AMP_Themes_Switcher.min.js' ), [], WP_AMP_THEMES_VERSION );
 	}
 
 }
