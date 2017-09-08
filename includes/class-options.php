@@ -17,6 +17,8 @@ class Options {
 		'facebook_app_id' => '',
 		'customize' => [],
 		'installed_themes' => [ 'obliq' ],
+		'push_notifications_enabled' => 0,
+		'push_domain',
 	];
 
 

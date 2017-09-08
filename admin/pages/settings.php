@@ -4,6 +4,8 @@ $wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
 $theme = $wp_amp_themes_options->get_setting( 'theme' );
 $analytics_id = $wp_amp_themes_options->get_setting( 'analytics_id' );
 $facebook_app_id = $wp_amp_themes_options->get_setting( 'facebook_app_id' );
+$push_domain = $wp_amp_themes_options->get_setting( 'push_domain' );
+$push_notifications_enabled = $wp_amp_themes_options->get_setting( 'push_notifications_enabled' );
 
 $wp_amp_themes_admin_updates = new \WP_AMP_Themes\Admin\Admin_Updates();
 $premium_content = $wp_amp_themes_admin_updates->premium_themes();
@@ -88,7 +90,16 @@ $installed_themes = $wp_amp_themes_options->get_setting( 'installed_themes' );
 				>
 				</input> <br/>
 				<p class="field-message error" id="error_analyticsid_container"></p>
-
+				<label class="textinput">Push domain (https only):</label>
+				<input
+					type="text"
+					name="wp_amp_themes_settings_pushdomain"
+					id="wp_amp_themes_settings_pushdomain"
+					value="<?php echo esc_url($push_domain); ?>"
+					placeholder="https://YOURDOMAIN.COM"
+				>
+				</input> <br/>
+				<p class="field-message error" id="error_pushdomain_container"></p>
 				<div <?php echo ( 'default' === $theme ) ? "style=display:none" : '' ?> >
 					<label class="textinput">Facebook App ID: </label>
 					<input
@@ -100,6 +111,11 @@ $installed_themes = $wp_amp_themes_options->get_setting( 'installed_themes' );
 					</input> <br/>
 				</div>
 				<p class="field-message error" id="error_facebookappid_container"></p>
+				<div class="spacer-10"></div>
+				<input type="hidden" name="wp_amp_settings_push_enabled" id="wp_amp_settings_push_enabled" value="<?php echo $push_notifications_enabled;?>" />
+				<input type="checkbox" name="wp_amp_settings_push_enabled_check" id="wp_amp_settings_push_enabled_check" value="0" <?php if ($push_notifications_enabled == 1) echo "checked" ;?> />
+				<label for ="wp_amp_settings_push_enabled_check">Display push notifications on AMP pages</label>
+				<div class="spacer-30"></div>
 				<a href="javascript:void(0)" id="wp_amp_themes_settings_send_btn" class="button button-primary button-large">Save</a>
 			</form>
 			<div class="spacer-20"></div>
