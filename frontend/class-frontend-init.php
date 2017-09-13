@@ -155,7 +155,7 @@ class Frontend_Init {
 			 isset( $one_signal_options['app_id'] ) &&
 			 '' !== $one_signal_options['app_id'] ) {
 
-				$wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
+				$wp_amp_themes_options = new Options();
 
 				$has_options_http = false == $one_signal_options['is_site_https'] &&
 								isset( $one_signal_options['subdomain'] ) &&
