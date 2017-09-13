@@ -2,8 +2,10 @@
 namespace WP_AMP_Themes\Frontend\Themes\Obliq;
 
 use \WP_AMP_Themes\Includes\Utils;
+use \WP_AMP_Themes\Includes\Options;
 
 $utils = new Utils();
+$wp_amp_themes_options = new Options();
 
 $base_text_color = sanitize_hex_color( $this->get_customizer_setting( 'base_text_color' ) );
 $post_title_text_color = sanitize_hex_color( $this->get_customizer_setting( 'post_title_text_color' ) );
@@ -962,3 +964,54 @@ amp-social-share {
 .amp-social-share-email {
     background-color: <?php echo $email_bg_color; ?>;
 }
+
+
+<?php if ( $wp_amp_themes_options->get_setting( 'push_notifications_enabled' ) ) : ?>
+
+	.web-push {
+		margin-top: 16px;
+	}
+
+	amp-web-push-widget button.subscribe {
+				display: inline-flex;
+				align-items: center;
+				border-radius: 2px;
+				border: 0;
+				box-sizing: border-box;
+				margin: 0;
+				padding: 10px 15px;
+				cursor: pointer;
+				outline: none;
+				font-size: 15px;
+				font-weight: 400;
+				background: #4A90E2;
+				color: white;
+				box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			}
+
+	amp-web-push-widget button.subscribe .subscribe-icon {
+		margin-right: 10px;
+	}
+
+	amp-web-push-widget button.subscribe:active {
+		transform: scale(0.99);
+	}
+
+	amp-web-push-widget button.unsubscribe {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		height: 45px;
+		border: 0;
+		margin: 0;
+		cursor: pointer;
+		outline: none;
+		font-size: 15px;
+		font-weight: 400;
+		background: transparent;
+		color: #B1B1B1;
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	}
+
+<?php endif; ?>

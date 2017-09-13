@@ -45,7 +45,7 @@ function WP_AMP_THEMES_SETTINGS() {
 
       return this.optional(element) || re.test(value);
     },
-      'Your code is invalid'
+    'Your code is invalid'
     );
 
     // this is the object that handles the form validations
@@ -57,6 +57,9 @@ function WP_AMP_THEMES_SETTINGS() {
         },
         wp_amp_themes_settings_facebookappid: {
           number: true
+        },
+        wp_amp_themes_settings_pushdomain: {
+          url: true
         }
       },
 
@@ -72,9 +75,23 @@ function WP_AMP_THEMES_SETTINGS() {
       errorElement: 'span'
     });
 
+    jQuery('#wp_amp_themes_settings_push_enabled_check',JSObject.DOMDoc).change(function() {
+
+      // set the value on the dummy text field that will always be visible in the post data
+      if (this.checked) {
+        jQuery('#'+JSObject.type+'_push_enabled',JSObject.DOMDoc).val('1');
+      } else {
+        jQuery('#'+JSObject.type+'_push_enabled',JSObject.DOMDoc).val('0');
+      }
+    });
+
     var $GoogleAnalyticsId = jQuery('#' + this.type + '_analyticsid', this.form);
     $GoogleAnalyticsId.data('holder', $GoogleAnalyticsId.attr('placeholder'));
     $GoogleAnalyticsId.focusin(function () { jQuery(this).attr('placeholder', ''); }).focusout(function () { jQuery(this).attr('placeholder', jQuery(this).data('holder')); });
+
+    var $PushDomain = jQuery('#' + this.type + '_pushdomain', this.form);
+    $PushDomain.data('holder', $PushDomain.attr('placeholder'));
+    $PushDomain.focusin(function () { jQuery(this).attr('placeholder', ''); }).focusout(function () { jQuery(this).attr('placeholder', jQuery(this).data('holder')); });
   };
 
   /**

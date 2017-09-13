@@ -1,6 +1,7 @@
 <?php
 	$categories = get_categories();
 	$pages = get_pages();
+	$logo = $this->get_customizer_setting( 'logo' );
 ?>
 
 
@@ -53,9 +54,11 @@
 					<!-- End Dropdown-inline -->
 				</li>
 			</ul>
-			<div class="ampstart-logo-wrap">
-				<amp-img layout="responsive" class="" width="30" height="30" src="<?php echo esc_url( $this->get_customizer_setting( 'logo' ) ); ?>"></amp-img>
-			</div>
+			<?php if ( '' != $logo ): ?>
+				<div class="ampstart-logo-wrap">
+					<amp-img layout="responsive" class="" width="30" height="30" src="<?php echo esc_url( $logo ); ?>"></amp-img>
+				</div>
+			<?php endif; ?>
 		</nav>
 	</div>
 </amp-sidebar>

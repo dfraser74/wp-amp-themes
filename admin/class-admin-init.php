@@ -20,7 +20,7 @@ class Admin_Init {
 	function __construct() {
 		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
 
-		add_action( 'admin_notices', [ $this, 'amp_plugin_check' ] );
+		add_action( 'admin_notices', [ $this, 'amp_themes_notices' ] );
 
 		add_filter( 'plugin_action_links_' . plugin_basename( WP_AMP_THEMES_PLUGIN_PATH . '/wp-amp-themes.php' ), [ $this, 'add_settings_link' ] );
 
@@ -54,7 +54,8 @@ class Admin_Init {
 	/**
 	 * Checks if the AMP plugin from Automattic is installed and displays a notice if not.
 	 */
-	public function amp_plugin_check() {
+	public function amp_themes_notices() {
+
 		if ( ! is_plugin_active( 'amp/amp.php' ) ) {
 
 			echo '<div class="notice notice-warning is-dismissible">
@@ -63,7 +64,71 @@ class Admin_Init {
 							Please make sure you have the plugin installed and activated. <a href="' . get_admin_url() . 'plugin-install.php?s=amp&tab=search&type=term">Download the AMP plugin</a>
 						</p>
 				  </div>';
+
+			return;
 		}
+
+		$wp_amp_themes_options = new Options();
+
+		if ( $wp_amp_themes_options->get_setting( 'push_notifications_enabled' ) ) {
+
+			if ( ! is_plugin_active( 'onesignal-free-web-push-notifications/onesignal.php' ) ) {
+
+				echo '<div class="notice notice-warning is-dismissible">
+							<p><b>WP AMP Themes</b> requires that you have the OneSignal plugin active in order for AMP Push Notifications to work.</p>
+							<p>
+								Please make sure you have the plugin installed and activated. <a href="' . get_admin_url() . 'plugin-install.php?s=onesignal&tab=search&type=term">Download the OneSignal plugin</a>
+							</p>
+					  </div>';
+
+				return;
+			}
+
+			$one_signal_settings = get_option( 'OneSignalWPSetting' );
+
+			if ( ! $one_signal_settings || ! is_array( $one_signal_settings ) || ! isset( $one_signal_settings['is_site_https'] ) ) {
+
+				echo $this->build_message ( 'OneSignal plugin', 'OneSignal' );
+
+				return;
+			}
+
+			if ( ! isset( $one_signal_settings['app_id'] ) || '' == $one_signal_settings['app_id'] ) {
+
+				echo $this->build_message ( 'OneSignal appId', 'OneSignal' );
+
+				return;
+			}
+
+			if ( ! $one_signal_settings['is_site_https'] ) {
+
+				if ( isset( $one_signal_settings['subdomain'] ) && '' != $one_signal_settings['subdomain'] ) {
+					return;
+				}
+
+				echo $this->build_message( 'subdomain', 'OneSignal' );
+
+				return;
+
+			} elseif ( '' == $wp_amp_themes_options->get_setting( 'push_domain' ) ) {
+
+				echo $this->build_message( 'domain', 'AMP Themes');
+
+			}
+		}
+	}
+
+
+	/**
+	 * Returns the admin notice message for push notifications
+	 */
+	public function build_message ( $subject, $plugin ) {
+
+		return '<div class="notice notice-warning is-dismissible">
+					<p>
+						Please make sure the ' . $subject . ' is set up correctly in the ' . $plugin . ' plugin configuration menu.
+					</p>
+				</div>';
 	}
 
 	/**

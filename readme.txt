@@ -3,7 +3,7 @@ Contributors: anghelalexandra, abarbulescu
 Tags: amp, accelerated mobile pages, mobile, amp project, google amp, mobile web, mobile internet, smartphone, iphone, android, windows, webkit, chrome, safari, mobile web app, html5, responsive ui, themes
 Requires at least: 4.4
 Tested up to: 4.8
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 
 WP AMP Themes helps you improve mobile user engagement with fast, compelling experiences. Discover Accelerated Mobile Pages HTML themes and get up and running by integrating them into your WordPress with ease.
@@ -101,6 +101,9 @@ The goal is for all published content, from news stories to videos and from blog
 AMP was designed with responsiveness in mind, to work across all screen sizes.
 
 == Changelog ==
+
+= 1.2 =
+* Added integration with OneSignal for push notifications.
 
 = 1.1 =
 * Added possibility to insert new themes.
