@@ -59,7 +59,7 @@ function WP_AMP_THEMES_SETTINGS() {
           number: true
         },
         wp_amp_themes_settings_pushdomain: {
-          url: true
+          url2: true
         }
       },
 

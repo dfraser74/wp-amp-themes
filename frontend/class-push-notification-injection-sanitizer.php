@@ -34,9 +34,9 @@ class WAT_Push_Notification_Injection_Sanitizer extends AMP_Base_Sanitizer {
 
 			$domain = $wp_amp_themes_options->get_setting( 'push_domain' );
 
-			$helper_url = $domain . '/amp-helper-frame.html?appId=' . $this->args['app_id'];
-			$dialog_url = $domain . '/amp-permission-dialog.html?appId=' . $this->args['app_id'];
-			$worker_url = $domain . '/OneSignalSDKWorker.js?appId=' . $this->args['app_id'];
+			$helper_url = $domain . '/wp-content/plugins/onesignal-free-web-push-notifications/sdk_files/amp-helper-frame.html?appId=' . $this->args['app_id'];
+			$dialog_url = $domain . '/wp-content/plugins/onesignal-free-web-push-notifications/sdk_files/amp-permission-dialog.html?appId=' . $this->args['app_id'];
+			$worker_url = $domain . '/wp-content/plugins/onesignal-free-web-push-notifications/sdk_files/OneSignalSDKWorker.js.php?appId=' . $this->args['app_id'];
 		}
 
 		$web_push_node = AMP_DOM_Utils::create_node( $this->dom, 'amp-web-push', [
