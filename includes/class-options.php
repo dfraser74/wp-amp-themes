@@ -18,7 +18,6 @@ class Options {
 		'customize' => [],
 		'installed_themes' => [ 'obliq' ],
 		'push_notifications_enabled' => 0,
-		'push_domain' => '',
 	];
 
 

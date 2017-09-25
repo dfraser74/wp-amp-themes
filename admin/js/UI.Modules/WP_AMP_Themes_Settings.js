@@ -57,9 +57,6 @@ function WP_AMP_THEMES_SETTINGS() {
         },
         wp_amp_themes_settings_facebookappid: {
           number: true
-        },
-        wp_amp_themes_settings_pushdomain: {
-          url2: true
         }
       },
 
@@ -89,9 +86,6 @@ function WP_AMP_THEMES_SETTINGS() {
     $GoogleAnalyticsId.data('holder', $GoogleAnalyticsId.attr('placeholder'));
     $GoogleAnalyticsId.focusin(function () { jQuery(this).attr('placeholder', ''); }).focusout(function () { jQuery(this).attr('placeholder', jQuery(this).data('holder')); });
 
-    var $PushDomain = jQuery('#' + this.type + '_pushdomain', this.form);
-    $PushDomain.data('holder', $PushDomain.attr('placeholder'));
-    $PushDomain.focusin(function () { jQuery(this).attr('placeholder', ''); }).focusout(function () { jQuery(this).attr('placeholder', jQuery(this).data('holder')); });
   };
 
   /**

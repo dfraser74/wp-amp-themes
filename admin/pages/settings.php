@@ -4,8 +4,18 @@ $wp_amp_themes_options = new \WP_AMP_Themes\Includes\Options();
 $theme = $wp_amp_themes_options->get_setting( 'theme' );
 $analytics_id = $wp_amp_themes_options->get_setting( 'analytics_id' );
 $facebook_app_id = $wp_amp_themes_options->get_setting( 'facebook_app_id' );
-$push_domain = $wp_amp_themes_options->get_setting( 'push_domain' );
 $push_notifications_enabled = $wp_amp_themes_options->get_setting( 'push_notifications_enabled' );
+
+$main_site_url_status = '';
+$one_signal_options = get_option( 'OneSignalWPSetting' );
+if ( is_array( $one_signal_options ) &&
+	isset( $one_signal_options['is_site_https'] ) &&
+	$one_signal_options['is_site_https'] ) {
+
+		$wp_amp_themes_admin_init = new \WP_AMP_Themes\Admin\Admin_Init();
+		$main_site_url_status = $wp_amp_themes_admin_init->check_main_url();
+
+}
 
 $wp_amp_themes_admin_updates = new \WP_AMP_Themes\Admin\Admin_Updates();
 $premium_content = $wp_amp_themes_admin_updates->premium_themes();
@@ -101,24 +111,20 @@ $installed_themes = $wp_amp_themes_options->get_setting( 'installed_themes' );
 					</input> <br/>
 				</div>
 				<p class="field-message error" id="error_facebookappid_container"></p>
-				<label class="textinput">Push domain (https only):</label>
-				<input
-					type="text"
-					name="wp_amp_themes_settings_pushdomain"
-					id="wp_amp_themes_settings_pushdomain"
-					value="<?php echo esc_url($push_domain); ?>"
-					placeholder="https://YOURDOMAIN.COM"
-				>
-				</input> <br/>
-				<p class="field-message error" id="error_pushdomain_container"></p>
 				<div class="spacer-10"></div>
 				<input type="hidden" name="wp_amp_themes_settings_push_enabled" id="wp_amp_themes_settings_push_enabled" value="<?php echo esc_attr($push_notifications_enabled);?>" />
 				<input type="checkbox" name="wp_amp_themes_settings_push_enabled_check" id="wp_amp_themes_settings_push_enabled_check" value="0" <?php if ($push_notifications_enabled == 1) echo "checked" ;?> />
 				<label for ="wp_amp_themes_settings_push_enabled_check">Display push notifications on AMP pages via the OneSignal plugin</label>
+				<p>For a guide on how to setup AMP push notifications please visit <a href="http://ampthemes.io/accelerated-mobile-pages-push-notifications-onesignal-wordpress-amp-themes/" target="_blank">this link</a>.</p>
 				<div class="spacer-30"></div>
 				<a href="javascript:void(0)" id="wp_amp_themes_settings_send_btn" class="button button-primary button-large">Save</a>
 			</form>
 			<div class="spacer-20"></div>
+			<?php if ( $push_notifications_enabled && is_array( $main_site_url_status )  && !$main_site_url_status['valid'] ): ?>
+				<div class="notice notice-error is-dismissible">
+					<p><?php echo $main_site_url_status['message']; ?></p>
+				</div>
+			<?php endif; ?>
 
 			<?php if ( count( $premium_themes ) > 0 ) : ?>
 

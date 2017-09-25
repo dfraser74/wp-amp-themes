@@ -52,6 +52,56 @@ class Admin_Init {
 
 
 	/**
+	* Checks that the site url settings are configured correctly.
+	*/
+	public function check_main_url() {
+
+		$url = plugins_url() . '/';
+
+		$status = [
+			'valid' => false,
+			'message' => '',
+		];
+
+		if ( false !== strpos( $url, 'http://' ) ) {
+
+			$status['message'] = 'There is a problem with your main site URL. Please change your WordPress Address(URL) or your Site Address(URL) to https in order for Push Notifications to function correctly.';
+			return $status;
+		}
+
+		$response = wp_remote_head( $url );
+		$response_code = wp_remote_retrieve_response_code( $response );
+
+		if ( '301' == $response_code || '302' == $response_code ) {
+
+			$status['message'] = 'There is a problem with your main site URL. Please make sure your WordPress Address(URL) or Site Address(URL) is valid in order for Push Notifications to function correctly.';
+			return $status;
+		}
+
+		if ( false === strpos( $url, 'www.') ) {
+
+			$www_check_response = wp_remote_head( str_replace( 'https://', 'https://www.', $url ) );
+			$www_check_response_code = wp_remote_retrieve_response_code( $www_check_response );
+
+		} else {
+
+			$www_check_response = wp_remote_head( str_replace( 'https://www.', 'https://', $url ) );
+			$www_check_response_code = wp_remote_retrieve_response_code( $www_check_response );
+		}
+
+
+		if ( '200' == $www_check_response_code && '200' == $response_code  ) {
+
+			$status['message'] = 'There is a problem with your main site URL. Plase make sure you have a single main URL configured in order for Push Notifications to function correctly.';
+			return $status;
+		}
+
+		$status['valid'] = true;
+
+		return $status;
+	}
+
+	/**
 	 * Checks if the AMP plugin from Automattic is installed and displays a notice if not.
 	 */
 	public function amp_themes_notices() {
@@ -109,10 +159,6 @@ class Admin_Init {
 				echo $this->build_message( 'subdomain', 'OneSignal' );
 
 				return;
-
-			} elseif ( '' == $wp_amp_themes_options->get_setting( 'push_domain' ) ) {
-
-				echo $this->build_message( 'domain', 'AMP Themes');
 
 			}
 		}

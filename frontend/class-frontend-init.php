@@ -147,7 +147,6 @@ class Frontend_Init {
 
 		$one_signal_options = get_option( 'OneSignalWPSetting' );
 
-		$inject = false;
 
 		if ( $one_signal_options &&
 			 is_array( $one_signal_options ) &&
@@ -155,16 +154,11 @@ class Frontend_Init {
 			 isset( $one_signal_options['app_id'] ) &&
 			 '' !== $one_signal_options['app_id'] ) {
 
-				$wp_amp_themes_options = new Options();
-
 				$has_options_http = false == $one_signal_options['is_site_https'] &&
 								isset( $one_signal_options['subdomain'] ) &&
 								'' !== $one_signal_options['subdomain'];
 
-				$has_options_https = true == $one_signal_options['is_site_https'] &&
-								'' !== $wp_amp_themes_options->get_setting( 'push_domain' );
-
-				if ( $has_options_http || $has_options_https ) {
+				if ( $has_options_http || $one_signal_options['is_site_https'] ) {
 
 					require_once( dirname( __FILE__ ) . '/class-push-notification-injection-sanitizer.php' );
 					$sanitizer_classes[ 'WAT_Push_Notification_Injection_Sanitizer' ] = $one_signal_options;
