@@ -10,7 +10,7 @@ WP AMP Themes helps you improve mobile user engagement with fast, compelling exp
 
  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; ![demo](http://d3oqwjghculspf.cloudfront.net/github/wp-amp-themes/vtFu1I7.gif) &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;  ![demo](http://d3oqwjghculspf.cloudfront.net/github/wp-amp-themes/JLs9bsw.gif)
 
-<h2>Introduction<h2>
+<h2>Introduction</h2>
 
 The **WordPress Accelerated Mobile Pages Themes** plugin helps bloggers, publishers and other content creators to easily add AMP support to their WordPress websites. The **WP AMP Themes** plugin includes one FREE AMP theme (OBLIQ) which is customizable (colors, fonts, appearance) via the WordPress admin area.
 
