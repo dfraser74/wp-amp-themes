@@ -16,18 +16,6 @@ The **WordPress Accelerated Mobile Pages Themes** plugin helps bloggers, publish
 
 The Accelerated Mobile Pages ("AMP") Project is an open source initiative that came out of discussions between publishers and technology companies about the need to improve the entire mobile content ecosystem for everyone — publishers, consumer platforms, creators, and users.
 
-Today, the expectation is that content should load super fast and be easy to explore. The reality is that content can take several seconds to load, or, because the user abandons the slow page, never fully loads at all. Accelerated Mobile Pages are web pages designed to load near instantaneously — they are a step towards a better mobile web for all.
-
-Speed matters and instant is the ideal. Research has shown higher bounce rates associated with slower-loading web pages. Using the AMP format will make it far more compelling for people to consume and engage with more content. But this isn’t just about speed and performance. We also want to promote enhanced distribution so that publishers can take advantage of the open web’s potential for their content to appear everywhere quickly — across platforms and apps — which can lead to more revenue via ads and subscriptions.
-
-Accelerated Mobile Pages are just like any other HTML page, but with a limited set of allowed technical functionality that is defined and governed by the open source AMP spec. Just like all web pages, Accelerated Mobile Pages will load in any modern browser or app webview.
-
-AMP files take advantage of various technical and architectural approaches that prioritize speed to provide a faster experience for users. AMP developers can use a rich and growing library of web components that offer the ability to embed rich media objects like video and social posts, display advertising, or collect analytics. The goal is not to homogenize how content looks and feels, but instead to build a more common technical core between pages that speeds up load times.
-
-In addition, AMP files can be cached in the cloud in order to reduce the time content takes to get to a user’s mobile device. By using the AMP format, content producers are making the content in AMP files available to be cached by third parties. Under this type of framework, publishers continue to control their content, but platforms can easily cache or mirror the content for optimal delivery speed to users. Google has provided the Google AMP Cache that can be used by anyone at no cost, and all AMPs will be cached by the Google AMP Cache. Other companies may build their own AMP cache as well.
-
-In summary, the goal is that the combination of limited technical functionality with a distribution system built around caching will lead to better performing pages, and increased audience development for publishers.
-
 The OBLIQ AMP theme (available for FREE) comes with support for post details and includes a side menu with categories and pages.
 
 Some of the AMP components that we've used when building OBLIQ:
@@ -51,6 +39,7 @@ Essentially a framework for creating mobile web pages, AMP consists of three bas
 * AMP CDN: An optional Content Delivery Network, it will take your AMP-enabled pages, cache them and automatically make some performance optimizations.
 
 <h2>What Will AMP Look Like On Google?</h2>
+
 Google has provided a demo of what an AMP feature would look like in the SERP. You can try it out by navigating to [g.co/ampdemo](http://g.co/ampdemo) on your mobile phone (or emulate it within Chrome Developer Tools). 
 Then, search for something like: “Donald Trump”.
 
