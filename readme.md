@@ -1,5 +1,6 @@
-WP AMP Themes - Accelerated Mobile Pages Templates
-=================
+# [WordPress Accelerated Mobile Pages Themes](https://ampthemes.io) &nbsp; [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Accelerated%20Mobile%20Pages%20Themes%20for%20@WordPress&url=https://ampthemes.io&via=appticles&hashtags=amp,mobile,amp-html,wordpress)
+
+
 [![GitHub release](https://img.shields.io/github/release/appticles/wp-amp-themes.svg)](https://github.com/appticles/wp-amp-themes)
 [![WordPress](https://img.shields.io/wordpress/v/wp-amp-themes.svg)](https://wordpress.org/plugins/wp-amp-themes/)
 [![WordPress](https://img.shields.io/wordpress/plugin/dt/wp-amp-themes.svg)](https://wordpress.org/plugins/wp-amp-themes/)
