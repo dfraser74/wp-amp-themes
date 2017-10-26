@@ -46,7 +46,7 @@ Then, search for something like: “Donald Trump”.
 You will see a carousel toward the top with AMP articles. Click on one for a reading experience embedded in the SERP. You can swipe right or left to read another AMP-enabled article. It’s a different experience from simply navigating to a publisher’s AMP page.
 
 
-<h2>FAQ</h2>
+<h2>Frequently Asked Questions</h2>
 
 1. **What are the consequences of using Accelerated Mobile Pages?**
 
